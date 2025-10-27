@@ -1,7 +1,54 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function Register() {
+  const [form,setForm] = useState({
+    email:'',
+    username:'',
+    phone:'',
+    password:''
+  })
+
+  const handleChange = (e)=>{
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`,{
+      method:'POST',
+      credentials:'include',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(form)
+
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      if (data.success) {
+        toast.success(data.success)
+      }else{
+        toast.error(data.error)
+      }
+    })
+    .catch(error=>{
+      console.log('Error al enviar los datos a Register');
+      console.error(error);
+      toast.error('Error al enviar los datos')  
+    })
+  
+  
+  }
+
+  useEffect(()=>{
+    document.title = 'Register'
+    
+    
+  },[])
 
   const [visiblePassword, setVisiblePassword] = useState(false)
 
@@ -18,7 +65,7 @@ export default function Register() {
         </p>
 
         {/* Formulario */}
-        <form className="flex flex-col justify-center items-center gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-6">
 
           <div className="grid grid-cols-1 gap-6">
             {/* Email */}
@@ -26,6 +73,8 @@ export default function Register() {
               <i className="fa-solid fa-envelope text-[20px] mr-2"></i>
               <input
                 type="email"
+                name="email"
+                onChange={handleChange}
                 placeholder="Email"
                 className="flex-1 h-full outline-none"
               />
@@ -33,9 +82,11 @@ export default function Register() {
 
             {/* Username */}
             <div className="bg-white rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
-            <i class="fa-solid fa-user text-[20px] mr-2"></i>
+            <i className="fa-solid fa-user text-[20px] mr-2"></i>
             <input
                 type="text"
+                name="username"
+                onChange={handleChange}
                 placeholder="Username"
                 className="flex-1 h-full outline-none"
             />
@@ -46,6 +97,8 @@ export default function Register() {
             <i className="fa-solid fa-phone text-[20px] mr-2"></i>
             <input
                 type="tel"
+                name="phone"
+                onChange={handleChange}
                 placeholder="Phone"
                 className="flex-1 h-full outline-none"
             />
@@ -56,6 +109,9 @@ export default function Register() {
               <i className="fa-solid fa-lock text-[20px] mr-2"></i>
               <input
                 type={visiblePassword ? 'text' : 'password'}
+                name="password"
+                onChange={handleChange}
+                autoComplete="off"
                 placeholder="Password"
                 className="flex-1 h-full outline-none"
               />

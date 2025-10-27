@@ -1,7 +1,50 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
+  const [form,setForm] = useState({
+    email:'',
+    password:''
+  })
+
+  const handleChange = (e)=>{
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`,{
+      method:'POST',
+      credentials:'include',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(form)
+
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      if (data.success) {
+        toast.success(data.success)
+      }else{
+        toast.error(data.error)
+      }
+    })
+    .catch(error=>{
+      console.log('Error al enviar los datos a Register');
+      console.error(error);
+      toast.error('Error al enviar los datos')  
+    })
+   
+  }
+
+  useEffect(()=>{
+      document.title = 'Login'
+    },[])
+  
 
   const [visiblePassword, setVisiblePassword] = useState(false)
 
@@ -23,7 +66,7 @@ export default function Home() {
         </button>
 
         {/* Formulario */}
-        <form className="flex flex-col justify-center items-center gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-6">
 
           <div className="grid grid-cols-1 gap-6">
             {/* Email */}
@@ -31,6 +74,8 @@ export default function Home() {
               <i className="fa-solid fa-envelope text-[20px] mr-2"></i>
               <input
                 type="email"
+                name="email"
+                onChange={handleChange}
                 placeholder="Email"
                 className="flex-1 h-full outline-none"
               />
@@ -41,6 +86,9 @@ export default function Home() {
               <i className="fa-solid fa-lock text-[20px] mr-2"></i>
               <input
                 type={visiblePassword ? 'text' : 'password'}
+                name="password"
+                onChange={handleChange}
+                autoComplete="off"
                 placeholder="Password"
                 className="flex-1 h-full outline-none"
               />
