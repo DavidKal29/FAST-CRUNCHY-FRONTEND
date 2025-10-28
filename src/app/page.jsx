@@ -34,7 +34,7 @@ export default function Home() {
       }
     })
     .catch(error=>{
-      console.log('Error al enviar los datos a Register');
+      console.log('Error al enviar los datos a Login');
       console.error(error);
       toast.error('Error al enviar los datos')  
     })
