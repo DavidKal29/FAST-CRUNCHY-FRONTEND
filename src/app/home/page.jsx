@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import HomeLink from '../components/HomeLink';
+import LoginLink from '../components/LoginLink';
 
 export default function Home() {
 
@@ -18,7 +19,8 @@ export default function Home() {
                 setUser(data.user)
                 console.log('Usuario:', data)
             }else{
-                toast.error(data.error)
+                console.log(data.error);
+                
             }
         })
         .catch(error=>{
@@ -50,11 +52,19 @@ export default function Home() {
     
     return (
         <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 py-2 gap-6'>
+            {/* Menú hamburguesa
+            <div className='bg-orange-500 top-0 absolute h-full w-[80%] left-0 flex justify-center items-center py-4 px-2'>
+                <div className='bg-black w-[20rem] rounded'>
+                    hola
+                </div>
+            </div> */}
+
+
             {/* Menu */}
             <div className='flex justify-between items-center w-full border-b-orange-500 border-b-2 mx-4'>
                 <HomeLink></HomeLink>
                 {
-                    user ? (<><i className="fa-solid fa-bars text-white text-[25px]"></i></>) : (<></>)
+                    user ? (<><i className="fa-solid fa-bars text-white text-[25px]"></i></>) : (<><LoginLink></LoginLink></>)
                 }
             </div>
 
@@ -102,6 +112,8 @@ export default function Home() {
 
                 {/* Pronto se incluirán promociones */}
             </div>
+
+            
         </div>
     )
 }

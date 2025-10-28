@@ -27,7 +27,8 @@ export default function Register() {
 
     const [form,setForm] = useState({
       email:'',
-      username:'',
+      name:'',
+      lastname:'',
       phone:'',
       password:''
     })
@@ -52,7 +53,7 @@ export default function Register() {
       .then(res=>res.json())
       .then(data=>{
         if (data.success) {
-          toast.success(data.success)
+          router.push('/home')
         }else{
           toast.error(data.error)
         }
@@ -104,14 +105,26 @@ export default function Register() {
                 />
               </div>
 
-              {/* Username */}
+              {/* Nombre */}
               <div className="bg-white rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
               <i className="fa-solid fa-user text-[20px] mr-2"></i>
               <input
                   type="text"
-                  name="username"
+                  name="name"
                   onChange={handleChange}
-                  placeholder="Username"
+                  placeholder="Nombre"
+                  className="flex-1 h-full outline-none"
+              />
+              </div>
+
+              {/* Apellidos */}
+              <div className="bg-white rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
+              <i className="fa-solid fa-user text-[20px] mr-2"></i>
+              <input
+                  type="text"
+                  name="lastname"
+                  onChange={handleChange}
+                  placeholder="Apellido"
                   className="flex-1 h-full outline-none"
               />
               </div>

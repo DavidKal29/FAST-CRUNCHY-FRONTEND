@@ -50,7 +50,7 @@ export default function Home() {
       .then(res=>res.json())
       .then(data=>{
         if (data.success) {
-          toast.success(data.success)
+          router.push('/home')
         }else{
           toast.error(data.error)
         }
