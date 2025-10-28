@@ -49,22 +49,86 @@ export default function Home() {
         setDomicilio(false)
     }
 
+    const [menu,setMenu] = useState(false)
+
     
     return (
         <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 py-2 gap-6'>
-            {/* Menú hamburguesa
-            <div className='bg-orange-500 top-0 absolute h-full w-[80%] left-0 flex justify-center items-center py-4 px-2'>
-                <div className='bg-black w-[20rem] rounded'>
-                    hola
+            {/* Menú hamburguesa */}
+            <div className={`bg-orange-500 top-0 absolute h-screen min-h-screen overflow-y-auto w-[80%] fixed flex justify-center items-center max-[360px]:px-4 px-3 ${menu ? 'left-0' : 'left-[-2000px]'} transition-all duration-300`}>
+                {/* Div oscuro */}
+                <div className='bg-black max-[360px]:w-[15rem] w-[20rem] rounded-[20px] py-2'>
+                    
+                    {/* Cabecera */}
+                    <div className='flex items-center gap-2 p-4 border-b-orange-500 border-b-[2px] mb-2'>
+                        <i className="fa-regular fa-circle-user text-orange-500 max-[360px]:text-[30px] text-[35px]"></i>
+                        <div className=''>
+                            <p className='text-white max-[360px]:text-[15px] text-[20px] font-semibold'>{user?.name}</p>
+                            <p className='text-gray-200 text-sm'>{user?.email}</p>
+                        </div>     
+                    </div>
+
+                    {/* Cuenta */}
+                    <div className='flex flex-col p-4 gap-4'>
+                        <span className='text-white font-bold'>CUENTA</span>
+
+                        {/* Opciones */}
+                        <div className='flex flex-col gap-4 items-start justify-center'>
+                            {/* Mi perfil */}
+                            <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
+                                <i className="fa-solid fa-user text-orange-500 mr-2 text-[16px]"></i>
+                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Mi perfil</p>
+                            </div>
+
+
+                            {/* Mis direcciones */}
+                            <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
+                                <i className="fa-solid fa-location-dot text-orange-500 mr-2 text-[16px]"></i>
+                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Mis direcciones</p>
+                            </div>
+
+
+                            {/* Ultimos pedidos */}
+                            <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
+                                <i className="fa-solid fa-folder-open text-orange-500 mr-2 text-[16px]"></i>
+                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Últimos Pedidos</p>
+                            </div>
+
+                            {/* Borrar cuenta */}
+                            <div className='flex bg-red-500 justify-start items-center rounded-[10px] p-2 w-full'>
+                                <i className="fa-solid fa-trash text-white mr-2 text-[16px]"></i>
+                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Borrar Cuenta</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Pie */}
+                    <div className='flex items-center gap-2 p-4 border-t-orange-500 border-t-[2px] max-[360px]:mt-1 mt-32'>
+                        {/* Ultimos pedidos */}
+                        <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
+                            <i className="fa-solid fa-right-from-bracket text-orange-500 mr-2 text-[16px]"></i>
+                            <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Cerrar Sesión</p>
+                        </div>
+                    </div>
+
+                
+                
                 </div>
-            </div> */}
+            </div>
 
 
             {/* Menu */}
             <div className='flex justify-between items-center w-full border-b-orange-500 border-b-2 mx-4'>
                 <HomeLink></HomeLink>
                 {
-                    user ? (<><i className="fa-solid fa-bars text-white text-[25px]"></i></>) : (<><LoginLink></LoginLink></>)
+                    user ? 
+                    (<>
+                        <button onClick={()=>{setMenu(!menu)}} className='cursor-pointer'><i className={`fa-solid fa-${menu ? 'x' : 'bars'} text-white text-[25px]`}></i></button>
+                    </>) 
+                    
+                    : 
+                    
+                    (<><LoginLink></LoginLink></>)
                 }
             </div>
 
