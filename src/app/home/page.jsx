@@ -82,66 +82,71 @@ export default function Home() {
     return (
         <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 py-2 gap-6'>
             {/* Menú hamburguesa */}
-            <div className={`bg-orange-500 top-0 absolute h-screen min-h-screen overflow-y-auto w-[80%] fixed flex justify-center items-center max-[360px]:px-4 px-3 ${menu ? 'left-0' : 'left-[-2000px]'} transition-all duration-300`}>
-                {/* Div oscuro */}
-                <div className='bg-black max-[360px]:w-[15rem] w-[20rem] rounded-[20px] py-2'>
+            <div className={`
+                fixed top-0 left-0 h-screen w-[80%] max-w-[400px] sm:max-w-[500px] md:max-w-[600px]
+                bg-orange-500 flex justify-center items-start
+                p-3 pt-6 sm:pt-8 md:pt-10
+                overflow-y-auto
+                transition-all duration-300
+                ${menu ? 'left-0' : 'left-[-2000px]'}
+                lg:hidden
+            `}>
+
+                {/* Contenedor negro que ocupa todo el alto */}
+                <div className='bg-black w-full h-full rounded-[20px] px-4 sm:px-6 md:px-8 flex flex-col'>
                     
                     {/* Cabecera */}
-                    <div className='flex items-center gap-2 p-4 border-b-orange-500 border-b-[2px] mb-2'>
-                        <i className="fa-regular fa-circle-user text-orange-500 max-[360px]:text-[30px] text-[35px]"></i>
-                        <div className=''>
-                            <p className='text-white max-[360px]:text-[15px] text-[20px] font-semibold'>{user?.name}</p>
-                            <p className='text-gray-200 text-sm'>{user?.email}</p>
+                    <div className='flex items-center gap-3 p-4 border-b-2 border-orange-500 mb-4'>
+                        <i className="fa-regular fa-circle-user text-orange-500 text-[35px] sm:text-[40px] md:text-[50px]"></i>
+                        <div>
+                            <p className='text-white font-semibold text-[20px] sm:text-[22px] md:text-[26px]'>{user?.name}</p>
+                            <p className='text-gray-200 text-sm sm:text-[14px] md:text-[16px]'>{user?.email}</p>
                         </div>     
                     </div>
 
-                    {/* Cuenta */}
-                    <div className='flex flex-col p-4 gap-4'>
-                        <span className='text-white font-bold'>CUENTA</span>
+                    {/* Sección CUENTA */}
+                    <div className='flex flex-col gap-4 flex-1 overflow-y-auto'>
+                        <span className='text-white font-bold text-[16px] sm:text-[18px] md:text-[20px]'>CUENTA</span>
 
                         {/* Opciones */}
-                        <div className='flex flex-col gap-4 items-start justify-center'>
+                        <div className='flex flex-col gap-3'>
                             {/* Mi perfil */}
-                            <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
-                                <i className="fa-solid fa-user text-orange-500 mr-2 text-[16px]"></i>
-                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Mi perfil</p>
+                            <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                                <i className="fa-solid fa-user text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mi perfil</p>
                             </div>
-
 
                             {/* Mis direcciones */}
-                            <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
-                                <i className="fa-solid fa-location-dot text-orange-500 mr-2 text-[16px]"></i>
-                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Mis direcciones</p>
+                            <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                                <i className="fa-solid fa-location-dot text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mis direcciones</p>
                             </div>
 
-
-                            {/* Ultimos pedidos */}
-                            <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
-                                <i className="fa-solid fa-folder-open text-orange-500 mr-2 text-[16px]"></i>
-                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Últimos Pedidos</p>
+                            {/* Últimos pedidos */}
+                            <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                                <i className="fa-solid fa-folder-open text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Últimos Pedidos</p>
                             </div>
 
                             {/* Borrar cuenta */}
-                            <div className='flex bg-red-500 justify-start items-center rounded-[10px] p-2 w-full'>
-                                <i className="fa-solid fa-trash text-white mr-2 text-[16px]"></i>
-                                <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Borrar Cuenta</p>
+                            <div className='flex items-center bg-red-500 rounded-[10px] p-3'>
+                                <i className="fa-solid fa-trash text-white mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Borrar Cuenta</p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Pie */}
-                    <div className='flex items-center gap-2 p-4 border-t-orange-500 border-t-[2px] max-[360px]:mt-1 mt-32'>
-                        {/* Cerrar sesión */}
-                        <button onClick={logout} className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
-                            <i className="fa-solid fa-right-from-bracket text-orange-500 mr-2 text-[16px]"></i>
-                            <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Cerrar Sesión</p>
+                    {/* Pie: Cerrar sesión */}
+                    <div className='mt-4 p-4 border-t-2 border-orange-500'>
+                        <button onClick={logout} className='flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
+                            <i className="fa-solid fa-right-from-bracket text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                            <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Cerrar Sesión</p>
                         </button>
                     </div>
 
-                
-                
                 </div>
             </div>
+
 
 
             {/* Menu */}
@@ -197,7 +202,7 @@ export default function Home() {
 
                     {/* Subtitulo de Promoción */}
                     <p className="text-left text-[15px] lg:text-[20px] text-white font-semibold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                    Estas son algunas de las promociones que podrás disfrutar ahora mism:
+                    Estas son algunas de las promociones que podrás disfrutar ahora mismo:
                     </p>
                 </div>
 
