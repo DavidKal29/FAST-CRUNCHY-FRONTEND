@@ -13,6 +13,8 @@ export default function Home() {
       })
       .then(res=>res.json())
       .then(data=>{
+        console.log(data);
+        
         if (data.success) {
           router.push('/home')
         }

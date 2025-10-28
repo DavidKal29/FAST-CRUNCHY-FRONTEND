@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import HomeLink from '../components/HomeLink';
 import LoginLink from '../components/LoginLink';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+
+    const router = useRouter()
 
     const [user,setUser] = useState(null)
 
@@ -29,6 +32,30 @@ export default function Home() {
             toast.error('Error al enviar los datos')  
         })
    
+    }
+
+    const logout = ()=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,{
+            method:'GET',
+            credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            
+            if (data.success) {
+                setUser(null)
+                router.push('/')
+            }else{
+                toast.error(data.error)
+                console.log(data.error);
+            }
+        })
+        .catch(error=>{
+            console.log('Error al enviar los datos a Logout');
+            console.error(error);
+            toast.error('Error al enviar los datos')  
+        })
     }
 
     useEffect(()=>{
@@ -104,11 +131,11 @@ export default function Home() {
 
                     {/* Pie */}
                     <div className='flex items-center gap-2 p-4 border-t-orange-500 border-t-[2px] max-[360px]:mt-1 mt-32'>
-                        {/* Ultimos pedidos */}
-                        <div className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
+                        {/* Cerrar sesión */}
+                        <button onClick={logout} className='flex bg-[#363333] justify-start items-center rounded-[10px] p-2 w-full'>
                             <i className="fa-solid fa-right-from-bracket text-orange-500 mr-2 text-[16px]"></i>
                             <p className='text-white max-[360px]:text-[12px] text-[16px] font-semibold'>Cerrar Sesión</p>
-                        </div>
+                        </button>
                     </div>
 
                 
