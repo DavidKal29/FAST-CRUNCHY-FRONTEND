@@ -37,10 +37,10 @@ export default function MenuBurguer({menu,user,logout}) {
                     </a>
     
                     {/* Mis direcciones */}
-                    <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                    <a href='/addresses' className='flex items-center bg-[#363333] rounded-[10px] p-3'>
                         <i className="fa-solid fa-location-dot text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                         <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mis direcciones</p>
-                    </div>
+                    </a>
     
                     {/* Últimos pedidos */}
                     <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
