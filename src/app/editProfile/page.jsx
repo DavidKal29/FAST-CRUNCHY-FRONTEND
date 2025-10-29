@@ -32,6 +32,12 @@ export default function EditProfile() {
         .then(data=>{
             if (data.success) {
                 setUser(data.user)
+                setForm({
+                    email: data.user.email || '',
+                    name: data.user.name || '',
+                    lastname: data.user.lastname || '',
+                    phone: data.user.phone || ''
+                });
                 console.log('Usuario:', data)
             }else{
                 console.log(data.error);
@@ -56,7 +62,10 @@ export default function EditProfile() {
     const handleSubmit = (e)=>{
       e.preventDefault()
 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`,{
+      console.log(form);
+      
+
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/editProfile`,{
         method:'POST',
         credentials:'include',
         headers:{'Content-Type':'application/json'},
@@ -66,13 +75,17 @@ export default function EditProfile() {
       .then(res=>res.json())
       .then(data=>{
         if (data.success) {
-          router.push('/home')
+          toast.success(data.success)
         }else{
-          toast.error(data.error)
+          if (data.message) {
+            toast.error(data.message[0])
+          }else{
+            toast.error(data.error)
+          }
         }
       })
       .catch(error=>{
-        console.log('Error al enviar los datos a Register');
+        console.log('Error al enviar los datos a Edit Profile');
         console.error(error);
         toast.error('Error al enviar los datos')  
       })
@@ -100,7 +113,7 @@ export default function EditProfile() {
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
 
-            <div className='flex flex-col xl:flex-row justify-center items-center gap-6 w-full'>
+            <div className='flex flex-col xl:flex-row justify-center items-center gap-6 lg:gap-12 w-full'>
                 {/* Formulario */}
                 <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-6 lg:gap-12 border-[2px] border-yellow-600 p-6 rounded">
 
@@ -114,7 +127,7 @@ export default function EditProfile() {
                         type="email"
                         name="email"
                         onChange={handleChange}
-                        value={user?.email}
+                        value={form.email}
                         placeholder="Email"
                         className="flex-1 h-full outline-none"
                         />
@@ -127,7 +140,7 @@ export default function EditProfile() {
                         type="text"
                         name="name"
                         onChange={handleChange}
-                        value={user?.name}
+                        value={form.name}
                         placeholder="Nombre"
                         className="flex-1 h-full outline-none"
                     />
@@ -140,7 +153,7 @@ export default function EditProfile() {
                         type="text"
                         name="lastname"
                         onChange={handleChange}
-                        value={user?.lastname}
+                        value={form.lastname}
                         placeholder="Apellido"
                         className="flex-1 h-full outline-none"
                     />
@@ -153,7 +166,7 @@ export default function EditProfile() {
                         type="tel"
                         name="phone"
                         onChange={handleChange}
-                        value={user?.phone}
+                        value={form.phone}
                         placeholder="Phone"
                         className="flex-1 h-full outline-none"
                     />

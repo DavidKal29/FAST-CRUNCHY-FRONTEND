@@ -55,8 +55,12 @@ export default function ChangePassword() {
         .then(data => {
           if (data.success) {
             toast.success(data.success);
-          } else {
-            toast.error(data.error);
+          }else{
+            if (data.message) {
+              toast.error(data.message[0])
+            }else{
+              toast.error(data.error)
+            }
           }
         })
         .catch(error => {

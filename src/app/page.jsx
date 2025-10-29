@@ -54,7 +54,11 @@ export default function Home() {
         if (data.success) {
           router.push('/home')
         }else{
-          toast.error(data.error)
+          if (data.message) {
+            toast.error(data.message[0])
+          }else{
+            toast.error(data.error)
+          }
         }
       })
       .catch(error=>{

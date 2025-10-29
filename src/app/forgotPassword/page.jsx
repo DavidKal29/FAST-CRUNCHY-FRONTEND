@@ -51,7 +51,11 @@ export default function ForgotPassword() {
         if (data.success) {
           toast.success(data.success)
         }else{
-          toast.error(data.error)
+          if (data.message) {
+            toast.error(data.message[0])
+          }else{
+            toast.error(data.error)
+          }
         }
       })
       .catch(error=>{
