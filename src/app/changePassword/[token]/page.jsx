@@ -80,9 +80,9 @@ export default function ChangePassword() {
         {/* Logo */}
         <img className="w-[10rem] sm:w-[12rem] md:w-[14rem] lg:w-[30rem]" src="/images/logos/logo.png" alt="" />
 
-        <div className="flex flex-col justify-center items-center gap-6 lg:bg-orange-500 lg:p-6 lg:rounded lg:gap-8">
+        <div className="flex flex-col justify-center items-center gap-6 lg:bg-yellow-600 lg:p-6 lg:rounded lg:gap-8">
           {/* Texto de Bienvenida */}
-          <p className="text-center text-[15px] lg:text-[20px] text-orange-500 lg:text-white font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+          <p className="text-center text-[15px] lg:text-[20px] text-yellow-600 lg:text-white font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
             ¡Inicia sesión y disfruta de la mejor app Fast Food del Planeta!
           </p>
 
@@ -132,17 +132,17 @@ export default function ChangePassword() {
 
             {/* Cambio de contraseña */}
             <p className="text-white text-center max-w-[16rem] sm:max-w-[20rem] md:max-w-[24rem]">
-              ¿Cambiaste la contraseña? <a href="/" className="text-orange-500 lg:text-yellow-200">Iniciar Sesión</a>
+              ¿Cambiaste la contraseña? <a href="/" className="text-yellow-600 lg:text-yellow-200">Iniciar Sesión</a>
             </p>
 
             {/* Botón Cambiar Contraseña */}
-            <button className="rounded text-center font-bold bg-orange-500 lg:bg-white text-white lg:text-orange-500 w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] cursor-pointer">
+            <button className="rounded text-center font-bold bg-yellow-600 lg:bg-white text-white lg:text-yellow-600 w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] cursor-pointer">
               Cambiar Contraseña
             </button>
 
             {/* Crear Cuenta */}
             <p className="text-white text-center max-w-[16rem] sm:max-w-[20rem] md:max-w-[24rem]">
-              ¿No tienes cuenta? <a href="/register" className="text-orange-500 lg:text-yellow-200">Crear Cuenta</a>
+              ¿No tienes cuenta? <a href="/register" className="text-yellow-600 lg:text-yellow-200">Crear Cuenta</a>
             </p>
           </form>
         </div>

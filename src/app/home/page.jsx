@@ -89,7 +89,7 @@ export default function Home() {
             {/* Menú hamburguesa */}
             <div className={`
                 fixed top-0 left-0 h-screen w-[80%] max-w-[400px] sm:max-w-[500px] md:max-w-[600px]
-                bg-orange-500 flex justify-center items-start
+                bg-yellow-600 flex justify-center items-start
                 p-3 pt-6 sm:pt-8 md:pt-10
                 overflow-y-auto
                 z-[10]
@@ -101,8 +101,8 @@ export default function Home() {
                 <div className='bg-black w-full h-full rounded-[20px] px-4 sm:px-6 md:px-8 flex flex-col'>
                     
                     {/* Cabecera */}
-                    <div className='flex items-center gap-3 p-4 border-b-2 border-orange-500 mb-4'>
-                        <i className="fa-regular fa-circle-user text-orange-500 text-[35px] sm:text-[40px] md:text-[50px]"></i>
+                    <div className='flex items-center gap-3 p-4 border-b-2 border-yellow-600 mb-4'>
+                        <i className="fa-regular fa-circle-user text-yellow-600 text-[35px] sm:text-[40px] md:text-[50px]"></i>
                         <div>
                             <p className='text-white font-semibold text-[20px] sm:text-[22px] md:text-[26px]'>{user?.name}</p>
                             <p className='text-gray-200 text-sm sm:text-[14px] md:text-[16px]'>{user?.email}</p>
@@ -117,24 +117,24 @@ export default function Home() {
                         <div className='flex flex-col gap-3'>
                             {/* Mi perfil */}
                             <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
-                                <i className="fa-solid fa-user text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <i className="fa-solid fa-user text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                                 <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mi perfil</p>
                             </div>
 
                             {/* Mis direcciones */}
                             <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
-                                <i className="fa-solid fa-location-dot text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <i className="fa-solid fa-location-dot text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                                 <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mis direcciones</p>
                             </div>
 
                             {/* Últimos pedidos */}
                             <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
-                                <i className="fa-solid fa-folder-open text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                                <i className="fa-solid fa-folder-open text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                                 <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Últimos Pedidos</p>
                             </div>
 
                             {/* Borrar cuenta */}
-                            <div className='flex items-center bg-red-500 rounded-[10px] p-3'>
+                            <div className='flex items-center bg-red-600 rounded-[10px] p-3'>
                                 <i className="fa-solid fa-trash text-white mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                                 <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Borrar Cuenta</p>
                             </div>
@@ -142,9 +142,9 @@ export default function Home() {
                     </div>
 
                     {/* Pie: Cerrar sesión */}
-                    <div className='mt-4 p-4 border-t-2 border-orange-500'>
-                        <button onClick={logout} className='flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
-                            <i className="fa-solid fa-right-from-bracket text-orange-500 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                    <div className='mt-4 p-4 border-t-2 border-yellow-600'>
+                        <button onClick={logout} className='cursor-pointer flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
+                            <i className="fa-solid fa-right-from-bracket text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                             <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Cerrar Sesión</p>
                         </button>
                     </div>
@@ -155,7 +155,7 @@ export default function Home() {
 
 
             {/* Menu */}
-            <div className='flex justify-between items-center w-full border-b-orange-500 border-b-2 md:border-b-4 mx-4'>
+            <div className='flex justify-between items-center w-full border-b-yellow-600 border-b-2 md:border-b-4 mx-4'>
                 <HomeLink></HomeLink>
                 {
                     user ? 
@@ -173,7 +173,7 @@ export default function Home() {
                 <div className='flex flex-col gap-4 xl:gap-6 justify-center items-start w-full'>
                     <div className='flex flex-col gap-2'>
                         {/* Texto de Bienvenida */}
-                        <p className="text-left text-[18px] md:text-[30px] text-orange-500 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+                        <p className="text-left text-[18px] md:text-[30px] text-yellow-600 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
                         ¡Bienvenid@ a Fast & Crunchy!
                         </p>
 
@@ -186,10 +186,10 @@ export default function Home() {
                     {/* Tipo de Pedido */}
                     <div className='flex gap-2'>
                         {/* Domicilio */}
-                        <button onClick={()=>{pedidoDomicilio()}} className={`cursor-pointer font-semibold text-white ${domicilio ? 'bg-orange-500' : 'bg-black border-2 border-orange-500'} rounded-[10px] px-4 py-1 text-sm md:text-[20px]`}>Envío a domicilio</button>
+                        <button onClick={()=>{pedidoDomicilio()}} className={`cursor-pointer font-semibold text-white ${domicilio ? 'bg-yellow-600' : 'bg-black border-2 border-yellow-600'} rounded-[10px] px-4 py-1 text-sm md:text-[20px]`}>Envío a domicilio</button>
                         
                         {/* Recoger */}
-                        <button onClick={()=>{pedidoRecoger()}} className={`cursor-pointer font-semibold text-white ${!domicilio ? 'bg-orange-500' : 'bg-black border-2 border-orange-500'} rounded-[10px] px-4 py-1 text-sm md:text-[20px]`}>Para recoger</button>
+                        <button onClick={()=>{pedidoRecoger()}} className={`cursor-pointer font-semibold text-white ${!domicilio ? 'bg-yellow-500' : 'bg-black border-2 border-yellow-500'} rounded-[10px] px-4 py-1 text-sm md:text-[20px]`}>Para recoger</button>
                     </div>
 
                     <div className='rounded-[10px] w-full '>
@@ -203,7 +203,7 @@ export default function Home() {
                         </div>
 
                         {/* Boton de pedir */}
-                        <button className='bg-orange-500 cursor-pointer text-white rounded-[20px] py-2 font-semibold w-full md:text-[20px]'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</button>
+                        <button className='bg-yellow-600 cursor-pointer text-white rounded-[20px] py-2 font-semibold w-full md:text-[20px]'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</button>
                         </div>
                 </div>
 
@@ -215,7 +215,7 @@ export default function Home() {
                     {/* Promociones */}
                     <div className='flex justify-center items-start max-w-3xl flex-col gap-2'>
                         {/* Texto de Promoción */}
-                        <p className="text-left text-[18px] md:text-[30px] text-orange-500 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+                        <p className="text-left text-[18px] md:text-[30px] text-yellow-600 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
                         PROMOCIONES DEL MES
                         </p>
 
