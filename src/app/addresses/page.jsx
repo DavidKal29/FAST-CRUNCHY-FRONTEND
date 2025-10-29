@@ -64,7 +64,7 @@ export default function Addresses() {
                     {/* Agregar mas */}
                     <div className='flex justify-between items-center w-full'>
                         <h1 className='font-bold text-white text-[30px]'>Mis Direcciones</h1>
-                        <a href="" className='bg-yellow-600 font-semibold text-black rounded-[10px] px-4 py-2'><i className="fa-solid fa-plus"></i> Añadir</a>
+                        <a href="/addAddress" className='bg-yellow-600 font-semibold text-black rounded-[10px] px-4 py-2'><i className="fa-solid fa-plus"></i> Añadir</a>
                     </div>
                     {/* Direcciones */}
                     <div className='flex flex-col justify-start items-center gap-6 max-h-[500px] w-full overflow-y-auto'>
@@ -78,8 +78,7 @@ export default function Addresses() {
                         <AddressTarget></AddressTarget>
                         <AddressTarget></AddressTarget>
                         
-
-                        
+        
                     </div>
                 </div>
             
