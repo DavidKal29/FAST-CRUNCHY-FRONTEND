@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Menu from '../components/Menu';
 import MenuBurguer from '../components/MenuBurguer';
+import Logout from '../components/Logout';
 
 
 export default function Home() {
@@ -39,29 +40,7 @@ export default function Home() {
    
     }
 
-    const logout = ()=>{
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,{
-            method:'GET',
-            credentials:'include'
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            
-            if (data.success) {
-                setUser(null)
-                router.push('/')
-            }else{
-                toast.error(data.error)
-                console.log(data.error);
-            }
-        })
-        .catch(error=>{
-            console.log('Error al enviar los datos a Logout');
-            console.error(error);
-            toast.error('Error al enviar los datos')  
-        })
-    }
+    
 
     useEffect(()=>{
         document.title = 'Home'
@@ -87,15 +66,12 @@ export default function Home() {
     return (
         <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6'>
             {/* Menú hamburguesa */}
-            <MenuBurguer menu={menu} user={user} logout={logout}></MenuBurguer>
+            <MenuBurguer menu={menu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></MenuBurguer>
             
-
-
-
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
-            
 
+            {/* Div Principal */}
             <div className='flex flex-col xl:flex-row justify-center items-start xl:justify-start gap-6 w-full'>
                 <div className='flex flex-col gap-4 xl:gap-6 justify-center items-start w-full'>
                     <div className='flex flex-col gap-2'>

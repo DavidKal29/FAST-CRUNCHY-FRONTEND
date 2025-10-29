@@ -1,0 +1,34 @@
+import React from 'react'
+
+export default function logout({router,toast,setUser}) {
+    const handleLogout = ()=>{
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                
+                if (data.success) {
+                    setUser(null)
+                    router.push('/')
+                }else{
+                    toast.error(data.error)
+                    console.log(data.error);
+                }
+            })
+            .catch(error=>{
+                console.log('Error al enviar los datos a Logout');
+                console.error(error);
+                toast.error('Error al enviar los datos')  
+            })
+        }
+
+    return (
+        <button onClick={handleLogout} className='cursor-pointer flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
+            <i className="fa-solid fa-right-from-bracket text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+            <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Cerrar Sesión</p>
+        </button>
+    )
+}

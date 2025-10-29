@@ -58,10 +58,7 @@ export default function MenuBurguer({menu,user,logout}) {
     
             {/* Pie: Cerrar sesión */}
             <div className='mt-4 p-4 border-t-2 border-yellow-600'>
-                <button onClick={logout} className='cursor-pointer flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
-                    <i className="fa-solid fa-right-from-bracket text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                    <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Cerrar Sesión</p>
-                </button>
+                {logout}
             </div>
     
         </div>
