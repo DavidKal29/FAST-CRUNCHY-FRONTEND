@@ -85,7 +85,7 @@ export default function Home() {
 
     
     return (
-        <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 py-2 gap-6'>
+        <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6'>
             {/* Menú hamburguesa */}
             <div className={`
                 fixed top-0 left-0 h-screen w-[80%] max-w-[400px] sm:max-w-[500px] md:max-w-[600px]
@@ -95,7 +95,6 @@ export default function Home() {
                 z-[10]
                 transition-all duration-300
                 ${menu ? 'left-0' : 'left-[-2000px]'}
-                lg:hidden
             `}>
 
                 {/* Contenedor negro que ocupa todo el alto */}
@@ -156,12 +155,12 @@ export default function Home() {
 
 
             {/* Menu */}
-            <div className='flex justify-between items-center w-full border-b-orange-500 border-b-2 mx-4'>
+            <div className='flex justify-between items-center w-full border-b-orange-500 border-b-2 md:border-b-4 mx-4'>
                 <HomeLink></HomeLink>
                 {
                     user ? 
                     (<>
-                        <button onClick={()=>{setMenu(!menu)}} className='cursor-pointer'><i className={`fa-solid fa-${menu ? 'x' : 'bars'} text-white text-[25px]`}></i></button>
+                        <button onClick={()=>{setMenu(!menu)}} className='cursor-pointer'><i className={`fa-solid fa-${menu ? 'x' : 'bars'} text-white text-[25px] md:text-[35px]`}></i></button>
                     </>) 
                     
                     : 
@@ -170,73 +169,88 @@ export default function Home() {
                 }
             </div>
 
-            <div className='flex flex-col justify-center items-start gap-6 w-full'>
-                <div className='flex flex-col gap-2'>
-                    {/* Texto de Bienvenida */}
-                    <p className="text-left text-[18px] lg:text-[20px] text-orange-500 lg:text-white font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                    ¡Bienvenid@ a Fast & Crunchy!
-                    </p>
+            <div className='flex flex-col xl:flex-row justify-center items-start xl:justify-start gap-6 w-full'>
+                <div className='flex flex-col gap-4 xl:gap-6 justify-center items-start w-full'>
+                    <div className='flex flex-col gap-2'>
+                        {/* Texto de Bienvenida */}
+                        <p className="text-left text-[18px] md:text-[30px] text-orange-500 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+                        ¡Bienvenid@ a Fast & Crunchy!
+                        </p>
 
-                    {/* Subtitulo de Bienvenida */}
-                    <p className="text-left text-[15px] lg:text-[20px] text-white font-semibold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                    Comienza a configurar tu pedido y échale un ojo a las novedades, por supuesto
-                    </p>
-                </div>
+                        {/* Subtitulo de Bienvenida */}
+                        <p className="text-left text-[15px] md:text-[20px] text-white font-semibold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+                        Comienza a configurar tu pedido y échale un ojo a las novedades, por supuesto
+                        </p>
+                    </div>
 
-                {/* Tipo de Pedido */}
-                <div className='flex gap-2'>
-                    {/* Domicilio */}
-                    <button onClick={()=>{pedidoDomicilio()}} className={`font-semibold text-white ${domicilio ? 'bg-orange-500' : 'bg-black border-2 border-orange-500'} rounded-[10px] px-4 py-1 text-sm`}>Envío a domicilio</button>
+                    {/* Tipo de Pedido */}
+                    <div className='flex gap-2'>
+                        {/* Domicilio */}
+                        <button onClick={()=>{pedidoDomicilio()}} className={`cursor-pointer font-semibold text-white ${domicilio ? 'bg-orange-500' : 'bg-black border-2 border-orange-500'} rounded-[10px] px-4 py-1 text-sm md:text-[20px]`}>Envío a domicilio</button>
+                        
+                        {/* Recoger */}
+                        <button onClick={()=>{pedidoRecoger()}} className={`cursor-pointer font-semibold text-white ${!domicilio ? 'bg-orange-500' : 'bg-black border-2 border-orange-500'} rounded-[10px] px-4 py-1 text-sm md:text-[20px]`}>Para recoger</button>
+                    </div>
+
+                    <div className='rounded-[10px] w-full '>
+                        <img className='w-full' src="/images/logos/promociones/image.png" alt="" />
+                    </div>
                     
-                    {/* Recoger */}
-                    <button onClick={()=>{pedidoRecoger()}} className={`font-semibold text-white ${!domicilio ? 'bg-orange-500' : 'bg-black border-2 border-orange-500'} rounded-[10px] px-4 py-1 text-sm`}>Para recoger</button>
+                    <div className='flex flex-col justify-center items-center w-full gap-4'>
+                        {/* Dirección */}
+                        <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-break text-white font-bold text-sm md:text-[20px] w-full text-center rounded-[15px] py-4`}>
+                        <i className="fa-solid fa-location-dot"></i> Avenida Constitución Manzaneda, 89
+                        </div>
+
+                        {/* Boton de pedir */}
+                        <button className='bg-orange-500 cursor-pointer text-white rounded-[20px] py-2 font-semibold w-full md:text-[20px]'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</button>
+                        </div>
                 </div>
+
                 
-                {/* Dirección */}
-                <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-break text-white font-bold text-sm w-full text-center rounded-[15px] py-4`}>
-                 <i className="fa-solid fa-location-dot"></i> Avenida Constitución Manzaneda, 89
-                </div>
 
-                <button className='bg-orange-500 text-white rounded-[20px] py-2 font-semibold w-full'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</button>
-
-                {/* Promociones */}
-                <div className='flex flex-col gap-2'>
-                    {/* Texto de Promoción */}
-                    <p className="text-left text-[18px] lg:text-[20px] text-orange-500 lg:text-white font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                     PROMOCIONES DEL MES
-                    </p>
-
-                    {/* Subtitulo de Promoción */}
-                    <p className="text-left text-[15px] lg:text-[20px] text-white font-semibold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                    Estas son algunas de las promociones que podrás disfrutar ahora mismo:
-                    </p>
-                </div>
 
                 {/* Carrusel de promociones */}
-                <div className="w-full max-w-3xl mx-auto">
-                <Swiper
-                    modules={[Autoplay, Pagination]}
-                    spaceBetween={20}
-                    slidesPerView={1} 
-                    loop={true}
-                    centeredSlides={true}
-                    autoplay={{
-                    delay: 2000,
-                    disableOnInteraction: false,
-                    }}
-                    grabCursor={true}
-                >
-                    {[1, 2, 3, 4].map((num) => (
-                    <SwiperSlide key={num}>
-                        <img
-                        src={`/images/logos/promociones/promo${num}.png`}
-                        alt={`Promoción ${num}`}
-                        className="rounded-2xl w-full object-cover"
-                        />
-                    </SwiperSlide>
-                    ))}
-                </Swiper>
-                </div>
+                <div className="w-full max-w-3xl">
+                    {/* Promociones */}
+                    <div className='flex justify-center items-start max-w-3xl flex-col gap-2'>
+                        {/* Texto de Promoción */}
+                        <p className="text-left text-[18px] md:text-[30px] text-orange-500 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+                        PROMOCIONES DEL MES
+                        </p>
+
+                        {/* Subtitulo de Promoción */}
+                        <p className="text-left text-[15px] md:text-[20px] text-white font-semibold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
+                        Estas son algunas de las promociones que podrás disfrutar ahora mismo:
+                        </p> 
+                    </div>
+                    
+                    <Swiper
+                        modules={[Autoplay, Pagination]}
+                        spaceBetween={20}
+                        slidesPerView={1} 
+                        loop={true}
+                        centeredSlides={true}
+                        autoplay={{
+                        delay: 2000,
+                        disableOnInteraction: false,
+                        }}
+                        grabCursor={true}
+                    >
+                        {[1, 2, 3, 4].map((num) => (
+                        <SwiperSlide key={num}>
+                            <img
+                            src={`/images/logos/promociones/promo${num}.png`}
+                            alt={`Promoción ${num}`}
+                            className="rounded-2xl w-full object-cover"
+                            />
+                        </SwiperSlide>
+                        ))}
+                    </Swiper>
+
+                    </div>
+                
+                
 
             </div>
 
