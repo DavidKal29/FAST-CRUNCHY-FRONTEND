@@ -1,13 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
-import HomeLink from '../components/HomeLink';
-import LoginLink from '../components/LoginLink';
 import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Menu from '../components/Menu';
+import MenuBurguer from '../components/MenuBurguer';
 
 
 export default function Home() {
@@ -87,87 +87,14 @@ export default function Home() {
     return (
         <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6'>
             {/* Menú hamburguesa */}
-            <div className={`
-                fixed top-0 left-0 h-screen w-[80%] max-w-[400px] sm:max-w-[500px] md:max-w-[600px]
-                bg-yellow-600 flex justify-center items-start
-                p-3 pt-6 sm:pt-8 md:pt-10
-                overflow-y-auto
-                z-[10]
-                transition-all duration-300
-                ${menu ? 'left-0' : 'left-[-2000px]'}
-            `}>
-
-                {/* Contenedor negro que ocupa todo el alto */}
-                <div className='bg-black w-full h-full rounded-[20px] px-4 sm:px-6 md:px-8 flex flex-col'>
-                    
-                    {/* Cabecera */}
-                    <div className='flex items-center gap-3 p-4 border-b-2 border-yellow-600 mb-4'>
-                        <i className="fa-regular fa-circle-user text-yellow-600 text-[35px] sm:text-[40px] md:text-[50px]"></i>
-                        <div>
-                            <p className='text-white font-semibold text-[20px] sm:text-[22px] md:text-[26px]'>{user?.name}</p>
-                            <p className='text-gray-200 text-sm sm:text-[14px] md:text-[16px]'>{user?.email}</p>
-                        </div>     
-                    </div>
-
-                    {/* Sección CUENTA */}
-                    <div className='flex flex-col gap-4 flex-1 overflow-y-auto'>
-                        <span className='text-white font-bold text-[16px] sm:text-[18px] md:text-[20px]'>CUENTA</span>
-
-                        {/* Opciones */}
-                        <div className='flex flex-col gap-3'>
-                            {/* Mi perfil */}
-                            <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
-                                <i className="fa-solid fa-user text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mi perfil</p>
-                            </div>
-
-                            {/* Mis direcciones */}
-                            <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
-                                <i className="fa-solid fa-location-dot text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mis direcciones</p>
-                            </div>
-
-                            {/* Últimos pedidos */}
-                            <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
-                                <i className="fa-solid fa-folder-open text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Últimos Pedidos</p>
-                            </div>
-
-                            {/* Borrar cuenta */}
-                            <div className='flex items-center bg-red-600 rounded-[10px] p-3'>
-                                <i className="fa-solid fa-trash text-white mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                                <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Borrar Cuenta</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Pie: Cerrar sesión */}
-                    <div className='mt-4 p-4 border-t-2 border-yellow-600'>
-                        <button onClick={logout} className='cursor-pointer flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
-                            <i className="fa-solid fa-right-from-bracket text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                            <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Cerrar Sesión</p>
-                        </button>
-                    </div>
-
-                </div>
-            </div>
+            <MenuBurguer menu={menu} user={user} logout={logout}></MenuBurguer>
+            
 
 
 
             {/* Menu */}
-            <div className='flex justify-between items-center w-full border-b-yellow-600 border-b-2 md:border-b-4 mx-4'>
-                <HomeLink></HomeLink>
-                {
-                    user ? 
-                    (<>
-                        <button onClick={()=>{setMenu(!menu)}} className='cursor-pointer'><i className={`fa-solid fa-${menu ? 'x' : 'bars'} text-white text-[25px] md:text-[35px]`}></i></button>
-                    </>) 
-                    
-                    : 
-                    
-                    (<><LoginLink></LoginLink></>)
-                }
-            </div>
+            <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
+            
 
             <div className='flex flex-col xl:flex-row justify-center items-start xl:justify-start gap-6 w-full'>
                 <div className='flex flex-col gap-4 xl:gap-6 justify-center items-start w-full'>
