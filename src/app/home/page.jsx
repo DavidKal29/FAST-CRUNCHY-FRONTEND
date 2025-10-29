@@ -4,6 +4,11 @@ import { toast } from 'sonner';
 import HomeLink from '../components/HomeLink';
 import LoginLink from '../components/LoginLink';
 import { useRouter } from 'next/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
 
 export default function Home() {
 
@@ -87,6 +92,7 @@ export default function Home() {
                 bg-orange-500 flex justify-center items-start
                 p-3 pt-6 sm:pt-8 md:pt-10
                 overflow-y-auto
+                z-[10]
                 transition-all duration-300
                 ${menu ? 'left-0' : 'left-[-2000px]'}
                 lg:hidden
@@ -187,7 +193,7 @@ export default function Home() {
                 </div>
                 
                 {/* Dirección */}
-                <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-break text-white font-bold text-sm sm w-full text-center rounded-[15px] py-4`}>
+                <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-break text-white font-bold text-sm w-full text-center rounded-[15px] py-4`}>
                  <i className="fa-solid fa-location-dot"></i> Avenida Constitución Manzaneda, 89
                 </div>
 
@@ -206,7 +212,32 @@ export default function Home() {
                     </p>
                 </div>
 
-                {/* Pronto se incluirán promociones */}
+                {/* Carrusel de promociones */}
+                <div className="w-full max-w-3xl mx-auto">
+                <Swiper
+                    modules={[Autoplay, Pagination]}
+                    spaceBetween={20}
+                    slidesPerView={1} 
+                    loop={true}
+                    centeredSlides={true}
+                    autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                    }}
+                    grabCursor={true}
+                >
+                    {[1, 2, 3, 4].map((num) => (
+                    <SwiperSlide key={num}>
+                        <img
+                        src={`/images/logos/promociones/promo${num}.png`}
+                        alt={`Promoción ${num}`}
+                        className="rounded-2xl w-full object-cover"
+                        />
+                    </SwiperSlide>
+                    ))}
+                </Swiper>
+                </div>
+
             </div>
 
             
