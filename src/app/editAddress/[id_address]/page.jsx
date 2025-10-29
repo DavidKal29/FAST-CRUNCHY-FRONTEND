@@ -1,26 +1,26 @@
 'use client';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import "swiper/css";
 import "swiper/css/pagination";
-import Menu from '../components/Menu';
-import MenuBurguer from '../components/MenuBurguer';
-import Logout from '../components/Logout';
-import Promociones from '../components/Promociones';
+import Menu from '../../components/Menu';
+import MenuBurguer from '../../components/MenuBurguer';
+import Logout from '../../components/Logout';
+import Promociones from '../../components/Promociones';
 
 
-export default function EditProfile() {
+export default function EditAddress() {
+
+    const {id_address} = useParams()
 
     const router = useRouter()
 
     const [user,setUser] = useState(null)
 
     const [form,setForm] = useState({
-      email:user?.email || '',
-      name:user?.name || '',
-      lastname:user?.lastname || '',
-      phone:user?.phone || ''
+      name:'',
+      address:''
     })
 
     const getProfile = ()=>{
@@ -32,20 +32,39 @@ export default function EditProfile() {
         .then(data=>{
             if (data.success) {
                 setUser(data.user)
-                setForm({
-                    email: data.user.email || '',
-                    name: data.user.name || '',
-                    lastname: data.user.lastname || '',
-                    phone: data.user.phone || ''
-                });
                 console.log('Usuario:', data)
             }else{
-                router.push('/')
+                console.log(data.error);
                 
             }
         })
         .catch(error=>{
             console.log('Error al enviar los datos a Perfil');
+            console.error(error);
+            toast.error('Error al enviar los datos')  
+        })
+   
+    }
+
+    const getAddress = ()=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/getAddress/${id_address}`,{
+            method:'GET',
+            credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log('que:',data);
+          
+            if (data.address) {
+                setForm({name:data.address.name, address:data.address.address})
+            }else{
+                console.log(data.error);
+                toast.error(data.error)
+                
+            }
+        })
+        .catch(error=>{
+            console.log('Error al enviar los datos a Get Address');
             console.error(error);
             toast.error('Error al enviar los datos')  
         })
@@ -62,30 +81,31 @@ export default function EditProfile() {
     const handleSubmit = (e)=>{
       e.preventDefault()
 
-      console.log(form);
-      
+      const formFinal = {name:form.name.toUpperCase(), address:form.address}
 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/editProfile`,{
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/editAddress/${id_address}`,{
         method:'POST',
         credentials:'include',
         headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(form)
+        body: JSON.stringify(formFinal)
 
       })
       .then(res=>res.json())
       .then(data=>{
         if (data.success) {
           toast.success(data.success)
+          router.push('/addresses')
         }else{
           if (data.message) {
             toast.error(data.message[0])
+            
           }else{
             toast.error(data.error)
           }
         }
       })
       .catch(error=>{
-        console.log('Error al enviar los datos a Edit Profile');
+        console.log('Error al enviar los datos a Add Address');
         console.error(error);
         toast.error('Error al enviar los datos')  
       })
@@ -95,11 +115,12 @@ export default function EditProfile() {
 
     
     useEffect(()=>{
-        document.title = 'Edit Profile'
+        document.title = 'Edit Address'
     },[])
 
     useEffect(()=>{
         getProfile()
+        getAddress()
     },[])
 
 
@@ -113,29 +134,17 @@ export default function EditProfile() {
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
 
-            <div className='flex flex-col xl:flex-row justify-center items-center gap-6 lg:gap-12 w-full'>
+            <div className='flex flex-col xl:flex-row justify-center items-stretch gap-6 lg:gap-12 w-full'>
                 {/* Formulario */}
                 <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-6 lg:gap-12 border-[2px] border-yellow-600 p-6 rounded">
 
-                    <h1 className='text-center text-[30px] font-semibold text-white'>Editar Perfil</h1>
+                    <h1 className='text-center text-[30px] font-semibold text-white'>Editar Dirección</h1>
 
                     <div className="grid grid-cols-1 gap-6">
-                    {/* Email */}
-                    <div className="bg-black text-white border-[2px] rounded border-yellow-600 rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
-                        <i className="fa-regular fa-envelope text-[20px] mr-2"></i>
-                        <input
-                        type="email"
-                        name="email"
-                        onChange={handleChange}
-                        value={form.email}
-                        placeholder="Email"
-                        className="flex-1 h-full outline-none"
-                        />
-                    </div>
 
                     {/* Nombre */}
                     <div className="bg-black text-white border-[2px] rounded border-yellow-600 rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
-                    <i className="fa-regular fa-user text-[20px] mr-2"></i>
+                    <i className="fa-solid fa-address-card text-[20px] mr-2"></i>
                     <input
                         type="text"
                         name="name"
@@ -146,37 +155,24 @@ export default function EditProfile() {
                     />
                     </div>
 
-                    {/* Apellidos */}
+                    {/* Dirección */}
                     <div className="bg-black text-white border-[2px] rounded border-yellow-600 rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
-                    <i className="fa-regular fa-user text-[20px] mr-2"></i>
+                    <i className="fa-solid fa-map-location-dot text-[20px] mr-2"></i>
                     <input
                         type="text"
-                        name="lastname"
+                        name="address"
                         onChange={handleChange}
-                        value={form.lastname}
-                        placeholder="Apellido"
-                        className="flex-1 h-full outline-none"
-                    />
-                    </div>
-
-                    {/* Teléfono */}
-                    <div className="bg-black text-white border-[2px] rounded border-yellow-600 rounded flex items-center w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
-                    <i className="fa-solid fa-phone text-[20px] mr-2"></i>
-                    <input
-                        type="tel"
-                        name="phone"
-                        onChange={handleChange}
-                        value={form.phone}
-                        placeholder="Phone"
+                        value={form.address}
+                        placeholder="Domicilio"
                         className="flex-1 h-full outline-none"
                     />
                     </div>
 
                     </div>
 
-                    {/* Botón Crear Cuenta */}
+                    {/* Botón Editar Dirección */}
                     <button className="rounded text-center font-bold bg-yellow-600 lg:bg-white text-white lg:text-yellow-600 w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] cursor-pointer">
-                        Guardar Cambios
+                        Editar Dirección
                     </button>
 
                     

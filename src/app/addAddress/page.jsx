@@ -67,16 +67,18 @@ export default function AddAddress() {
       .then(data=>{
         if (data.success) {
           toast.success(data.success)
+          router.push('/addresses')
         }else{
           if (data.message) {
             toast.error(data.message[0])
+            
           }else{
             toast.error(data.error)
           }
         }
       })
       .catch(error=>{
-        console.log('Error al enviar los datos a Add Address');
+        console.log('Error al enviar los datos a Edit Address');
         console.error(error);
         toast.error('Error al enviar los datos')  
       })
@@ -140,7 +142,7 @@ export default function AddAddress() {
 
                     </div>
 
-                    {/* Botón Crear Cuenta */}
+                    {/* Botón Editar Dirección */}
                     <button className="rounded text-center font-bold bg-yellow-600 lg:bg-white text-white lg:text-yellow-600 w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] cursor-pointer">
                         Añadir Dirección
                     </button>

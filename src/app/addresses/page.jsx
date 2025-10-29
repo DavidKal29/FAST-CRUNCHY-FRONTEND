@@ -16,6 +16,7 @@ export default function Addresses() {
     const router = useRouter()
 
     const [user,setUser] = useState(null)
+    const [addresses,setAddresses] = useState([])
 
     const getProfile = ()=>{
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/profile`,{
@@ -27,12 +28,59 @@ export default function Addresses() {
             if (data.success) {
                 setUser(data.user)
             }else{
-                console.log(data.error);
+                router.push('/')
                 
             }
         })
         .catch(error=>{
             console.log('Error al enviar los datos a Perfil');
+            console.error(error);
+            toast.error('Error al enviar los datos')  
+        })
+   
+    }
+
+    const getAddresses = ()=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/myAddresses`,{
+            method:'GET',
+            credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if (data.addresses) {
+                setAddresses(data.addresses)
+            }else{
+                console.log(data.error);
+                toast.error(data.error)
+            }
+        })
+        .catch(error=>{
+            console.log('Error al enviar los datos a My Addresses');
+            console.error(error);
+            toast.error('Error al enviar los datos')  
+        })
+   
+    }
+
+    const deleteAddress = (id_address)=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/deleteAddress/${id_address}`,{
+            method:'GET',
+            credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            
+            if (data.success) {
+                toast.success(data.success)
+                getAddresses()
+            }else{
+                console.log(data.error);
+                toast.error(data.error)
+            }
+        })
+        .catch(error=>{
+            console.log('Error al enviar los datos a My Addresses');
             console.error(error);
             toast.error('Error al enviar los datos')  
         })
@@ -47,6 +95,7 @@ export default function Addresses() {
 
     useEffect(()=>{
         getProfile()
+        getAddresses()
     },[])
 
 
@@ -63,20 +112,21 @@ export default function Addresses() {
             <div className='flex flex-col justify-center items-center gap-2 w-full'>
                     {/* Agregar mas */}
                     <div className='flex justify-between items-center w-full'>
-                        <h1 className='font-bold text-white text-[30px]'>Mis Direcciones</h1>
+                        {addresses.length===0 ? (<><h1 className='font-bold text-white text-[30px]'>Sin Direcciones</h1></>) : (<><h1 className='font-bold text-white text-[30px]'>Mis Direcciones</h1></>)}
+                        
                         <a href="/addAddress" className='bg-yellow-600 font-semibold text-black rounded-[10px] px-4 py-2'><i className="fa-solid fa-plus"></i> Añadir</a>
                     </div>
                     {/* Direcciones */}
                     <div className='flex flex-col justify-start items-center gap-6 max-h-[500px] w-full overflow-y-auto'>
 
                         {/* Tarjetas de Direccion */}
-                        <AddressTarget></AddressTarget>
-                        <AddressTarget></AddressTarget>
-                        <AddressTarget></AddressTarget>
-                        <AddressTarget></AddressTarget>
-                        <AddressTarget></AddressTarget>
-                        <AddressTarget></AddressTarget>
-                        <AddressTarget></AddressTarget>
+                        {addresses.map((addr,index)=>(
+                            <AddressTarget key={index} address={addr} deleteAddress={deleteAddress}></AddressTarget>
+                        ))}
+
+                        
+
+
                         
         
                     </div>
