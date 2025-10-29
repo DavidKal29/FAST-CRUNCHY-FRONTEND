@@ -31,10 +31,10 @@ export default function MenuBurguer({menu,user,logout}) {
                 {/* Opciones */}
                 <div className='flex flex-col gap-3'>
                     {/* Mi perfil */}
-                    <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                    <a href='/editProfile' className='flex items-center bg-[#363333] rounded-[10px] p-3'>
                         <i className="fa-solid fa-user text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                         <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mi perfil</p>
-                    </div>
+                    </a>
     
                     {/* Mis direcciones */}
                     <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>

@@ -2,10 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import Promociones from '../components/Promociones';
 import Menu from '../components/Menu';
 import MenuBurguer from '../components/MenuBurguer';
 import Logout from '../components/Logout';
@@ -111,49 +108,8 @@ export default function Home() {
                 </div>
 
                 
-
-
-                {/* Carrusel de promociones */}
-                <div className="w-full max-w-3xl">
-                    {/* Promociones */}
-                    <div className='flex justify-center items-start max-w-3xl flex-col gap-2'>
-                        {/* Texto de Promoción */}
-                        <p className="text-left text-[18px] md:text-[30px] text-yellow-600 font-bold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                        PROMOCIONES DEL MES
-                        </p>
-
-                        {/* Subtitulo de Promoción */}
-                        <p className="text-left text-[15px] md:text-[20px] text-white font-semibold max-w-[20rem] sm:max-w-[24rem] md:max-w-[32rem]">
-                        Estas son algunas de las promociones que podrás disfrutar ahora mismo:
-                        </p> 
-                    </div>
-                    
-                    <Swiper
-                        modules={[Autoplay, Pagination]}
-                        spaceBetween={20}
-                        slidesPerView={1} 
-                        loop={true}
-                        centeredSlides={true}
-                        autoplay={{
-                        delay: 2000,
-                        disableOnInteraction: false,
-                        }}
-                        grabCursor={true}
-                    >
-                        {[1, 2, 3, 4].map((num) => (
-                        <SwiperSlide key={num}>
-                            <img
-                            src={`/images/logos/promociones/promo${num}.png`}
-                            alt={`Promoción ${num}`}
-                            className="rounded-2xl w-full object-cover"
-                            />
-                        </SwiperSlide>
-                        ))}
-                    </Swiper>
-
-                    </div>
-                
-                
+                {/* Carrusel y Promociones */}
+                <Promociones></Promociones>
 
             </div>
 
