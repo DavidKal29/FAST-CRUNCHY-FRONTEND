@@ -98,9 +98,11 @@ export default function Home() {
                     
                     <div className='flex flex-col justify-center items-center w-full gap-4'>
                         {/* Dirección */}
-                        <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-break text-white font-bold text-sm md:text-[20px] w-full text-center rounded-[15px] py-4`}>
-                        <i className="fa-solid fa-location-dot"></i> Avenida Constitución Manzaneda, 89
-                        </div>
+                        {user && user.address &&(<>
+                            <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-white font-bold text-sm md:text-[20px] w-full text-center rounded-[15px] py-4`}>
+                            <i className="fa-solid fa-location-dot"></i> {user.address.address}
+                            </div>
+                        </>)}
 
                         {/* Boton de pedir */}
                         <button className='bg-yellow-600 cursor-pointer text-white rounded-[20px] py-2 font-semibold w-full md:text-[20px]'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</button>
