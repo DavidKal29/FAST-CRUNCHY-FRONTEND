@@ -121,10 +121,8 @@ export default function Addresses() {
 
                         {/* Tarjetas de Direccion */}
                         {addresses.map((addr,index)=>(
-                            <AddressTarget key={index} address={addr} deleteAddress={deleteAddress}></AddressTarget>
+                            <AddressTarget key={index} address={addr} deleteAddress={deleteAddress} getAddresses={getAddresses}></AddressTarget>
                         ))}
-
-                        
 
 
                         

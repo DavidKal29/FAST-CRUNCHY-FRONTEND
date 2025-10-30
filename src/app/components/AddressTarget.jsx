@@ -1,6 +1,33 @@
 import React from 'react'
+import { toast } from 'sonner'
 
-export default function AddressTarget({address,deleteAddress}) {
+export default function AddressTarget({address,deleteAddress,getAddresses}) {
+    const predeterminateAddress = (id_address)=>{
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/predeterminateAddress/${id_address}`,{
+            method:'GET',
+            credentials:'include'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if (data.success) {
+                toast.success(data.success)
+                getAddresses()
+                
+            }else{
+                console.log(data.error);
+                toast.error(data.error)
+            }
+        })
+        .catch(error=>{
+            console.log('Error al enviar los datos a Perfil');
+            console.error(error);
+            toast.error('Error al enviar los datos')  
+        })
+   
+    }
+
+
+
   return (
     <div className='flex justify-start items-start flex-col gap-4 border-[2px] border-yellow-600 p-6 rounded w-full'>
         {/* Nombre Guardado */}
@@ -23,12 +50,25 @@ export default function AddressTarget({address,deleteAddress}) {
 
         </div>
 
-        {/* Hacer predeterminado */}
-        <div className='flex gap-2 justify-center items-center text-yellow-600 p-2 rounded-[10px]'>
-            <i className="fa-regular fa-star"></i>
-            <p>Hacer predeterminado</p>
-        </div>
-
+        {
+            address.predetermined 
+            ? 
+            (<>
+                <div className='flex gap-2 justify-center items-center text-yellow-600 p-2 rounded-[10px]'>
+                    <i className="fa-solid fa-star"></i>
+                    <p>Dirección predeterminada</p>
+                </div>
+            </>) 
+            : 
+            (<>
+                <div className='flex gap-2 justify-center items-center text-yellow-600 p-2 rounded-[10px]'>
+                    <button onClick={()=>{predeterminateAddress(address._id)}} className='cursor-pointer'><i className="fa-regular fa-star"></i></button>
+                    <p>Hacer predeterminada</p>
+                </div>
+            </>)
+        
+        }
+        
         {/* Usar esta direccion */}
         <p className='text-semibold text-yellow-600'>Usar esta dirección</p>
 
