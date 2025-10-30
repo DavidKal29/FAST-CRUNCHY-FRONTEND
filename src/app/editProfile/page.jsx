@@ -111,7 +111,7 @@ export default function EditProfile() {
             <MenuBurguer menu={menu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></MenuBurguer>
             
             {/* Menu */}
-            <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
+            <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
 
             <div className='flex flex-col xl:flex-row justify-center items-center gap-6 lg:gap-12 w-full'>
                 {/* Formulario */}

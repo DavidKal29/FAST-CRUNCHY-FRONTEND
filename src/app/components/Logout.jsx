@@ -26,9 +26,9 @@ export default function logout({router,toast,setUser}) {
         }
 
     return (
-        <button onClick={handleLogout} className='cursor-pointer flex items-center bg-[#363333] p-3 rounded-[10px] w-full'>
-            <i className="fa-solid fa-right-from-bracket text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-            <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Cerrar Sesión</p>
+        <button onClick={handleLogout} className='cursor-pointer flex items-center bg-[#363333] p-3 xl:px-4 xl:py-2 rounded-[10px]'>
+            <i className="fa-solid fa-right-from-bracket text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]  xl:text-[16px]"></i>
+            <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px] xl:text-[16px]'>Cerrar Sesión</p>
         </button>
     )
 }

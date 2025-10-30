@@ -118,7 +118,7 @@ export default function Addresses() {
             <MenuBurguer menu={menu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></MenuBurguer>
             
             {/* Menu */}
-            <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
+            <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
 
             <div className='flex flex-col justify-center items-center gap-2 w-full'>
                     {/* Agregar mas */}

@@ -66,7 +66,7 @@ export default function Home() {
             <MenuBurguer menu={menu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></MenuBurguer>
             
             {/* Menu */}
-            <Menu menu={menu} setMenu={setMenu} user={user}></Menu>
+            <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
 
             {/* Div Principal */}
             <div className='flex flex-col xl:flex-row justify-center items-start xl:justify-start gap-6 w-full'>
