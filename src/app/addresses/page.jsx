@@ -62,30 +62,41 @@ export default function Addresses() {
    
     }
 
-    const deleteAddress = (id_address)=>{
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/deleteAddress/${id_address}`,{
-            method:'GET',
-            credentials:'include'
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            
-            if (data.success) {
-                toast.success(data.success)
-                getAddresses()
-            }else{
-                console.log(data.error);
-                toast.error(data.error)
-            }
-        })
-        .catch(error=>{
-            console.log('Error al enviar los datos a My Addresses');
-            console.error(error);
-            toast.error('Error al enviar los datos')  
-        })
-   
+    const deleteAddress = (id_address) => {
+        toast("¿Seguro que quieres eliminar esta dirección?", {
+            action: {
+                label: "Eliminar",
+                onClick: () => {
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/deleteAddress/${id_address}`, {
+                        method: "GET",
+                        credentials: "include",
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+
+                        if (data.success) {
+                            toast.success(data.success);
+                            getAddresses();
+                        } else {
+                            console.log(data.error);
+                            toast.error(data.error);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log("Error al enviar los datos a My Addresses");
+                        console.error(error);
+                        toast.error("Error al enviar los datos");
+                    });
+                },
+            },
+            cancel: {
+                label: "Cancelar",
+                onClick: () => toast.info("Eliminación cancelada"),
+            },
+        });
     }
+
 
 
     
