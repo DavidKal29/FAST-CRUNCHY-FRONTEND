@@ -105,7 +105,7 @@ export default function Home() {
                         </>)}
 
                         {/* Boton de pedir */}
-                        <button className='bg-yellow-600 cursor-pointer text-white rounded-[20px] py-2 font-semibold w-full md:text-[20px]'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</button>
+                        <a href='/products' className='text-center bg-yellow-600 cursor-pointer text-white rounded-[20px] py-2 font-semibold w-full md:text-[20px]'>Empezar pedido {domicilio ? 'a domicilio' : 'para recoger'}</a>
                         </div>
                 </div>
 
