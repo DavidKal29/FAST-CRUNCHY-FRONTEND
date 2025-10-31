@@ -41,8 +41,20 @@ export default function Home() {
 
     const [showPopup,setShowPopup] = useState(null)
     const [selectedProduct,setSelectedProduct] = useState(null)
+    const [selectedIngredients,setSelectedIngredients] = useState([])
 
     const categories = ['burgers','pizzas','kebabs','tacos','complements','drinks','deserts']
+
+
+    const popUp = (product) =>{
+        setShowPopup(true)
+        setSelectedProduct(product)
+        setSelectedIngredients(product?.ingredients || [])
+    }
+
+    const allSelected = selectedIngredients?.every(ing=>(ing.selected === true || ing.selected === undefined) && ing.selected != false)
+
+    const allRemoved = selectedIngredients?.every(ing=>(ing.selected === false || ing.selected === undefined) && ing.selected != true)
 
     const ingredientsFormalizer = (ingredients_array)=>{
         let text = ''
@@ -76,6 +88,39 @@ export default function Home() {
             toast.error('Error al enviar los datos')  
         })
    
+    }
+
+    const saveCart = (product) =>{
+
+        const updatedProduct = {
+            ...product,
+            ingredients:[...selectedIngredients],
+            quantity: 1
+        }
+        
+        let cart = JSON.parse(localStorage.getItem('cart'))
+
+        if (cart) {
+
+            const existingIndex = cart.findIndex(p=>p._id === updatedProduct._id && JSON.stringify(p.ingredients) === JSON.stringify(updatedProduct.ingredients))
+
+            if (existingIndex != -1) {
+                cart[existingIndex].quantity += 1
+            }else{
+                cart.push(updatedProduct)
+            }
+            
+
+            localStorage.setItem('cart',JSON.stringify(cart))
+
+        }else{
+            localStorage.setItem('cart',JSON.stringify([updatedProduct]))
+        }
+
+        toast.success('Agregado al carrito')
+
+
+        
     }
 
 
@@ -124,13 +169,13 @@ export default function Home() {
 
             <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-4'>
                 {products.map((product,index)=>(
-                    <div onClick={()=>{setShowPopup(true); setSelectedProduct(product)}} key={index} className='flex justify-start items-center gap-4 border-[2px] border-yellow-600 relative rounded-[10px] p-2 h-[8rem]'>
+                    <div onClick={()=>{popUp(product)}} key={index} className='cursor-pointer flex justify-start items-center gap-4 border-[2px] border-yellow-600 relative rounded-[10px] p-2 h-[8rem]'>
                         <img className='w-[20%]' key={index} src={product.image} alt="" />
                         <div className='flex flex-col justify-center items-start '>
                             <span className='text-yellow-600 font-bold '>{product.name}</span>
                             {product.ingredients && (<><p className='text-white text-sm'>{ingredientsFormalizer(product.ingredients)}</p></>)}
                         </div>
-                        <p className='text-yellow-600 font-bold absolute right-1 bottom-0'>{product.price}€</p>
+                        <p className='text-yellow-600 font-bold absolute right-2 bottom-0'>{product.price}€</p>
                         
                     </div>
                 ))}
@@ -144,7 +189,7 @@ export default function Home() {
                     onClick={() => setShowPopup(false)}
                 >
                     <div 
-                        className='bg-black border-2 border-yellow-600 rounded-2xl p-6 max-[360px]:w-[90%] md:w-[70%] relative shadow-xl text-center'
+                        className='bg-black border-2 border-yellow-600 rounded-2xl p-6 max-[360px]:w-[90%] md:w-[70%] xl:w-[80%] relative shadow-xl text-center'
                         onClick={(e) => e.stopPropagation()} // evita que se cierre al click dentro
                     >
                         {/* Botón de cerrar */}
@@ -190,13 +235,25 @@ export default function Home() {
                                 {/* Botones de acción */}
                                 <div className='flex justify-start items-center gap-2'>
                                     <button 
-                                    className='cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full px-4 py-1 transition'
+                                    className='cursor-pointer bg-red-600 disabled:bg-red-800 text-white font-semibold rounded-full px-4 py-1 transition'
+                                    disabled={allRemoved}
+                                    onClick={()=>{setSelectedIngredients(prev=>
+                                        prev.map(ing =>
+                                            ing.selected === undefined ? ing : {...ing, selected:false}
+                                        )
+                                    )}}
                                     >
                                         Quitar todo
                                     </button>
                                     
                                     <button 
-                                    className='cursor-pointer bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full px-4 py-1 transition'
+                                    className='cursor-pointer bg-green-600 disabled:bg-green-800 text-white font-semibold rounded-full px-4 py-1 transition'
+                                    disabled={allSelected}
+                                    onClick={()=>{setSelectedIngredients(prev=>
+                                        prev.map(ing =>
+                                            ing.selected === undefined ? ing : {...ing, selected:true}
+                                        )
+                                    )}}
                                     >
                                         Restaurar
                                     </button>
@@ -204,13 +261,22 @@ export default function Home() {
 
                                 {/* Ingredientes */}
                                 <div className='flex flex-wrap justify-start items-center gap-2 mt-2 w-full'>
-                                    {selectedProduct.ingredients?.map((ingredient, index) => (
-                                    <div
-                                        key={index}
-                                        className='bg-black text-yellow-600 border border-yellow-600 font-semibold text-[11px] rounded-full px-3 py-2 break-words max-w-[140px] text-center hover:bg-yellow-600 hover:text-black cursor-pointer transition'
-                                    >
-                                        {ingredient.name}
-                                    </div>
+                                    {selectedIngredients.map((ingredient, index) => (
+
+                                        <button
+                                            key={index}
+                                            className={`font-semibold text-[11px] rounded-full px-3 py-2 break-words max-w-[140px] text-center cursor-pointer ${ingredient?.selected === undefined ? 'bg-yellow-600 text-black' : ingredient.selected === false ? 'bg-red-500 text-white' : 'bg-black text-yellow-600 border-[2px] border-yellow-600'}`}
+                                            disabled={ingredient?.selected === undefined ? true : false}
+                                            onClick={()=>{
+                                                setSelectedIngredients(prev =>
+                                                    prev.map(ing =>
+                                                        ing.name === ingredient.name ? {...ing, selected:!ing.selected} : ing
+                                                    )
+                                                )
+                                            }}
+                                        >
+                                            {ingredient.name}
+                                        </button>
                                     ))}
                                 </div>
 
@@ -230,6 +296,7 @@ export default function Home() {
                                 </button>
                                 
                                 <button 
+                                onClick={()=>{saveCart(selectedProduct);setShowPopup(null)}}
                                 className='cursor-pointer bg-yellow-600 text-black font-semibold rounded-full px-4 py-1'
                                 >
                                     Guardar
