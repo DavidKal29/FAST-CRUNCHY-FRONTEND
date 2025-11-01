@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Menu from '../components/Menu';
 import MenuBurguer from '../components/MenuBurguer';
 import Logout from '../components/Logout';
+import CartLink from '../components/CartLink';
 
 
 export default function Home() {
@@ -117,10 +118,27 @@ export default function Home() {
             localStorage.setItem('cart',JSON.stringify([updatedProduct]))
         }
 
+        getCartitems()
+
         toast.success('Agregado al carrito')
+     
+    }
 
+    const [cartCounter,setCartCounter] = useState(0)
 
-        
+    const getCartitems = ()=>{
+        const cart = JSON.parse(localStorage.getItem('cart'))
+
+        let counter = 0
+
+        if (cart) {
+            cart.forEach(product => {
+                counter += product.quantity
+            });
+
+            setCartCounter(counter)
+        }
+
     }
 
 
@@ -136,6 +154,7 @@ export default function Home() {
 
     useEffect(()=>{
         getProfile()
+        getCartitems()
         getProducts(category)
     },[])
 
@@ -145,12 +164,16 @@ export default function Home() {
 
     
     return (
-        <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6 relative'>
+        <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6'>
             {/* Menú hamburguesa */}
             <MenuBurguer menu={menu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></MenuBurguer>
             
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
+
+            {/* Carrito */}
+            <CartLink cartCounter={cartCounter}></CartLink>
+
 
             <div className='flex flex-col justify-center w-full items-center gap-2'>
                 {/* Categorias */}
