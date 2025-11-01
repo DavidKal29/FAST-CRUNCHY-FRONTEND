@@ -35,6 +35,12 @@ export default function MenuBurguer({menu,user,logout}) {
                         <i className="fa-solid fa-user text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                         <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Mi perfil</p>
                     </a>
+
+                    {/* Productos */}
+                    <a href='/products' className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                        <i className="fa-solid fa-utensils text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
+                        <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Productos</p>
+                    </a>
     
                     {/* Mis direcciones */}
                     <a href='/addresses' className='flex items-center bg-[#363333] rounded-[10px] p-3'>

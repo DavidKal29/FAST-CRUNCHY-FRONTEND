@@ -18,6 +18,12 @@ export default function Menu({menu,setMenu,user,logout}) {
                         <i className="fa-solid fa-user text-yellow-600 mr-1 text-[16px]"></i>
                         <p className='text-white font-semibold text-[16px]'>Mi perfil</p>
                     </a>
+
+                    {/* Productos */}
+                    <a href='/products' className='flex items-center bg-[#363333] rounded-[10px] px-4 py-2'>
+                        <i className="fa-solid fa-utensils text-yellow-600 mr-1 text-[16px]"></i>
+                        <p className='text-white font-semibold text-[16px]'>Productos</p>
+                    </a>
     
                     {/* Mis direcciones */}
                     <a href='/addresses' className='flex items-center bg-[#363333] rounded-[10px] px-4 py-2'>
