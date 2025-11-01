@@ -8,6 +8,7 @@ import Menu from '../../components/Menu';
 import MenuBurguer from '../../components/MenuBurguer';
 import Logout from '../../components/Logout';
 import Promociones from '../../components/Promociones';
+import CartLink from '@/app/components/CartLink';
 
 
 export default function EditAddress() {
@@ -133,6 +134,9 @@ export default function EditAddress() {
             
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
+
+            {/* Carrito */}
+            <CartLink></CartLink>
 
             <div className='flex flex-col xl:flex-row justify-center items-stretch gap-6 lg:gap-12 w-full'>
                 {/* Formulario */}

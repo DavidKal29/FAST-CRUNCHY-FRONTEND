@@ -8,6 +8,7 @@ import Menu from '../components/Menu';
 import MenuBurguer from '../components/MenuBurguer';
 import Logout from '../components/Logout';
 import Promociones from '../components/Promociones';
+import CartLink from '../components/CartLink';
 
 
 export default function EditProfile() {
@@ -112,6 +113,9 @@ export default function EditProfile() {
             
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
+
+            {/* Carrito */}
+            <CartLink></CartLink>
 
             <div className='flex flex-col xl:flex-row justify-center items-center gap-6 lg:gap-12 w-full'>
                 {/* Formulario */}

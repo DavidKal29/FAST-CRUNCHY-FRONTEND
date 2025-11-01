@@ -118,27 +118,13 @@ export default function Home() {
             localStorage.setItem('cart',JSON.stringify([updatedProduct]))
         }
 
-        getCartitems()
+
+        //Funcion para que el captador de eventos del localstorage del CartLink se de cuenta que algo cambió
+        window.dispatchEvent(new Event('storage'))
+
 
         toast.success('Agregado al carrito')
      
-    }
-
-    const [cartCounter,setCartCounter] = useState(0)
-
-    const getCartitems = ()=>{
-        const cart = JSON.parse(localStorage.getItem('cart'))
-
-        let counter = 0
-
-        if (cart) {
-            cart.forEach(product => {
-                counter += product.quantity
-            });
-
-            setCartCounter(counter)
-        }
-
     }
 
 
@@ -154,7 +140,6 @@ export default function Home() {
 
     useEffect(()=>{
         getProfile()
-        getCartitems()
         getProducts(category)
     },[])
 
@@ -172,7 +157,7 @@ export default function Home() {
             <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
 
             {/* Carrito */}
-            <CartLink cartCounter={cartCounter}></CartLink>
+            <CartLink></CartLink>
 
 
             <div className='flex flex-col justify-center w-full items-center gap-2'>

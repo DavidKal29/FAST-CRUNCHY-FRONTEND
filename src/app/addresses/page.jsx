@@ -7,8 +7,8 @@ import "swiper/css/pagination";
 import Menu from '../components/Menu';
 import MenuBurguer from '../components/MenuBurguer';
 import Logout from '../components/Logout';
-import Promociones from '../components/Promociones';
 import AddressTarget from '../components/AddressTarget';
+import CartLink from '../components/CartLink';
 
 
 export default function Addresses() {
@@ -119,6 +119,9 @@ export default function Addresses() {
             
             {/* Menu */}
             <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}></Menu>
+
+            {/* Carrito */}
+            <CartLink></CartLink>
 
             <div className='flex flex-col justify-center items-center gap-2 w-full'>
                     {/* Agregar mas */}
