@@ -133,8 +133,8 @@ export default function Orders() {
                     <div className='flex flex-col justify-start items-center gap-6 max-h-[500px] w-full overflow-y-auto'>
 
                         {/* Tarjetas de Direccion */}
-                        {orders.map((order,index)=>(
-                            <OrderTarget key={index} order={order} deleteOrder={deleteOrder}></OrderTarget>
+                        {orders.map((order)=>(
+                            <OrderTarget key={order._id} order={order} deleteOrder={deleteOrder}></OrderTarget>
                         ))}       
         
                     </div>

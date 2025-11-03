@@ -162,6 +162,10 @@ export default function Cart() {
     }
 
     const createOrder = ()=>{
+        if (!user?.address && domicilio) {
+            toast.error('Debes añadir una dirección')
+        }
+
         const address = domicilio ? user.address.address : 'none'
 
         const order = {price:price, products:cart, pickUp:!domicilio, address:address, createdAt: new Date()}
