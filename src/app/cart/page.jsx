@@ -7,7 +7,7 @@ import MenuBurguer from '../components/MenuBurguer';
 import Logout from '../components/Logout';
 
 
-export default function Home() {
+export default function Cart() {
 
     const router = useRouter()
 
@@ -42,7 +42,8 @@ export default function Home() {
         let cart = JSON.parse(localStorage.getItem('cart'))
 
         if (cart) {
-            setCart(cart)
+            const reversedCart = [...cart].reverse()
+            setCart(reversedCart)
         }else{
             setCart([])
         }
@@ -155,6 +156,54 @@ export default function Home() {
         }
 
     }
+
+
+    const [confirmPopUp,setConfirmPopUp] = useState(null)
+    const [paymentPopUp,setPaymentPopUp] = useState(null)
+
+    const [domicilio,setDomicilio] = useState(true)
+    
+    const pedidoDomicilio = ()=>{
+        setDomicilio(true)
+    }
+    
+    const pedidoRecoger = ()=>{
+        setDomicilio(false)
+    }
+
+    const createOrder = ()=>{
+        const address = domicilio ? user.address.address : 'none'
+
+        const order = {price:price, products:cart, pickUp:!domicilio, address:address}
+
+        console.log(order);
+        
+    
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/createorder`,{
+            method:'POST',
+            credentials:'include',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({order}) //Metemos dentro de objeto para el Body de Nest
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if (data.success) {
+                toast.success(data.success)
+                setCart([])
+                localStorage.clear()
+            }else{
+                console.log(data.error);
+                toast.error(data.error)
+                    
+            }
+        })
+        .catch(error=>{
+            console.log('Error al enviar los datos a Create Order');
+            console.error(error);
+            toast.error('Error al enviar los datos')  
+        })
+       
+    }
     
 
     useEffect(()=>{
@@ -195,9 +244,11 @@ export default function Home() {
             {cart.length>0 && (<>
                 {/* Pagar */}
                 <div className='flex justify-between items-center w-full gap-4'>
+                    {/* Precio Total */}
                     <h1 className='font-bold text-white text-[20px]'>{price.toFixed(2)}€</h1>
                             
-                    <button className='cursor-pointer font-semibold rounded-[20px] px-4 py-2 bg-yellow-600 text-black'>Pagar</button>
+                    {/* Boton para pagar */}
+                    <button onClick={()=>{user ? setConfirmPopUp(true) : router.push('/')}} className='cursor-pointer font-semibold rounded-[20px] px-4 py-2 bg-yellow-600 text-black'>Pagar</button>
                 </div>
                 
                 {/* Productos del carrito */}
@@ -246,6 +297,85 @@ export default function Home() {
                     ))}
                 </div>
             </>)}
+
+
+            {/* Popup de confirmación */}
+            {confirmPopUp && (
+                <div 
+                    className='fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50'
+                    onClick={() => setConfirmPopUp(false)}
+                >
+                    <div 
+                        className='bg-black border-2 border-yellow-600 rounded-2xl p-6 max-[360px]:w-[90%] md:w-[70%] xl:w-[50%] relative shadow-xl flex flex-col justify-start items-start gap-6'
+                        onClick={(e) => e.stopPropagation()} // evita que se cierre al click dentro
+                    >
+                        <h1 className='text-yellow-600 font-semibold text-[25px]'>Confirmar Pedido</h1>
+
+                        <p className='text-white'>Elige como completar tu pedido y revisa la dirección de entrega (si es envío a domcilio)</p>
+
+                        <div className='flex justify-center items-center gap-4'>
+                            {/* Domicilio */}
+                            <button onClick={()=>{pedidoDomicilio()}} className={`cursor-pointer font-semibold text-white ${domicilio ? 'bg-yellow-600' : 'bg-black border-2 border-yellow-600'} rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>Envío a domicilio</button>
+                            
+                            {/* Recoger */}
+                            <button onClick={()=>{pedidoRecoger()}} className={`cursor-pointer font-semibold text-white ${!domicilio ? 'bg-yellow-500' : 'bg-black border-2 border-yellow-500'} rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>Para recoger</button>
+                        </div>
+                        
+                        {/* Dirección */}
+                        {user && user.address &&(<>
+                            <div className={`${domicilio ? 'block' : 'hidden'} bg-[#1B1A1A] text-white font-bold text-sm md:text-[15px] w-full rounded-[15px] p-4 flex justify-center items-center gap-4`}>
+                                <div className='flex justify-center items-center gap-2'>
+                                    <i className="fa-solid fa-location-dot"></i> {user.address.address}
+                                </div>
+                                <a className='text-yellow-600 font-semibold' href="/addresses">Cambiar</a>
+                            </div>
+                        </>)}
+
+                        <div className='flex justify-between items-center w-full'>
+                            <button onClick={()=>{setConfirmPopUp(false)}} className='cursor-pointer text-yellow-600 font-semibold text-md'>Cerrar</button>
+                            <button onClick={()=>{setConfirmPopUp(false);setPaymentPopUp(true)}} className='cursor-pointer bg-yellow-600 text-black rounded py-2 px-4 font-semibold'>Continuar</button>
+                        </div>
+
+                    </div>
+                
+                </div>
+         
+            )}
+
+            {/* Popup de pago */}
+            {paymentPopUp && (
+                <div 
+                    className='fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50'
+                    onClick={() => setPaymentPopUp(false)}
+                >
+                    <div 
+                        className='bg-black border-2 border-yellow-600 rounded-2xl p-6 max-[360px]:w-[90%] md:w-[70%] xl:w-[50%] relative shadow-xl flex flex-col justify-start items-start gap-6'
+                        onClick={(e) => e.stopPropagation()} // evita que se cierre al click dentro
+                    >
+                        <h1 className='text-yellow-600 font-semibold text-[25px]'>Simular Pago</h1>
+
+                        {/* Importe a pagar */}
+                        <div className='flex justify-center items-center gap-4 border-2 border-yellow-600 text-white rounded-[10px] p-4'>
+                            <i className="fa-solid fa-id-card text-[20px]"></i>
+                            <div className='flex flex-col justify-center items-start'>
+                                <p className='text-[15px]'>Importe a cobrar</p>
+                                <span className='font-bold text-[30px]'>{price.toFixed(2)}€</span>
+                            </div>
+                        </div>
+
+                        <p className='text-white'>No se realizará ningún cargo real. Pulse Pagar Ahora para finalizar el pedido</p>
+                        
+                    
+                        <div className='flex justify-between items-center w-full'>
+                            <button onClick={()=>{setPaymentPopUp(false);}} className='cursor-pointer text-yellow-600 font-semibold text-md'>Cancelar</button>
+                            <button onClick={()=>{createOrder();setPaymentPopUp(false)}} className='cursor-pointer bg-yellow-600 text-black rounded py-2 px-4 font-semibold'>Pagar Ahora</button>
+                        </div>
+
+                    </div>
+                
+                </div>
+         
+            )}
             
         </div>
     )

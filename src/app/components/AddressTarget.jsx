@@ -56,21 +56,18 @@ export default function AddressTarget({address,deleteAddress,getAddresses}) {
             (<>
                 <div className='flex gap-2 justify-center items-center text-yellow-600 p-2 rounded-[10px]'>
                     <i className="fa-solid fa-star"></i>
-                    <p>Dirección predeterminada</p>
+                    <p>Dirección elegida</p>
                 </div>
             </>) 
             : 
             (<>
                 <div className='flex gap-2 justify-center items-center text-yellow-600 p-2 rounded-[10px]'>
                     <button onClick={()=>{predeterminateAddress(address._id)}} className='cursor-pointer'><i className="fa-regular fa-star"></i></button>
-                    <p>Hacer predeterminada</p>
+                    <p>Usar esta dirección</p>
                 </div>
             </>)
         
         }
-        
-        {/* Usar esta direccion */}
-        <p className='text-semibold text-yellow-600'>Usar esta dirección</p>
 
     </div>
   )
