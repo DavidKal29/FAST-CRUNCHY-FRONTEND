@@ -32,10 +32,10 @@ export default function Menu({menu,setMenu,user,logout}) {
                     </a>
     
                     {/* Últimos pedidos */}
-                    <div className='flex items-center bg-[#363333] rounded-[10px] px-4 py-2'>
+                    <a href='/orders' className='flex items-center bg-[#363333] rounded-[10px] px-4 py-2'>
                         <i className="fa-solid fa-folder-open text-yellow-600 mr-1 text-[16px]"></i>
                         <p className='text-white font-semibold text-[16px]'>Últimos Pedidos</p>
-                    </div>
+                    </a>
     
                     {/* Borrar cuenta */}
                     <div className='flex items-center bg-red-600 rounded-[10px] px-4 py-2'>

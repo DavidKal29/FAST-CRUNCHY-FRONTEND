@@ -49,10 +49,10 @@ export default function MenuBurguer({menu,user,logout}) {
                     </a>
     
                     {/* Últimos pedidos */}
-                    <div className='flex items-center bg-[#363333] rounded-[10px] p-3'>
+                    <a href='/orders' className='flex items-center bg-[#363333] rounded-[10px] p-3'>
                         <i className="fa-solid fa-folder-open text-yellow-600 mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
                         <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Últimos Pedidos</p>
-                    </div>
+                    </a>
     
                     {/* Borrar cuenta */}
                     <div className='flex items-center bg-red-600 rounded-[10px] p-3'>
