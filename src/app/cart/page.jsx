@@ -249,10 +249,10 @@ export default function Cart() {
                 {/* Productos del carrito */}
                 <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-4'>
                     {cart.map((product,index)=>(
-                        <div key={index} className='cursor-pointer flex justify-start items-center flex-col gap-4 border-[2px] border-yellow-600 relative rounded-[10px] p-4'>
+                        <div key={index} className='cursor-pointer flex justify-center items-center flex-col gap-4 border-[2px] border-yellow-600 relative rounded-[10px] p-4 h-[10rem]'>
 
-                        <div className='flex justify-start items-center gap-2'>
-                            <img className='w-[20%]' key={index} src={product.image} alt="" />
+                        <div className='flex justify-start items-center gap-2 w-full'>
+                            <img className='w-[15%]' key={index} src={product.image} alt="" />
                             
                             
                             <div className='flex flex-col justify-center items-start '>
