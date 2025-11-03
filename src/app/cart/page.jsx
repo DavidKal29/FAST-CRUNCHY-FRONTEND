@@ -60,8 +60,6 @@ export default function Cart() {
             });
 
             setPrice(price)
-        }else{
-            setCart([])
         }
 
     }
@@ -180,6 +178,7 @@ export default function Cart() {
         .then(res=>res.json())
         .then(data=>{
             if (data.success) {
+                router.push('/orders');
                 toast.success(data.success)
                 setCart([])
                 localStorage.clear()
