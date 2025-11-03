@@ -59,7 +59,7 @@ export default function Home() {
 
     
     return (
-        <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6'>
+        <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 md:px-8 lg:px-16 py-2 md:py-4 gap-6'>
             {/* Header */}
             <Header router={router} toast={toast} user={user} setUser={setUser} menu={menu} setMenu={setMenu} cartVisibility={true}></Header>
 
