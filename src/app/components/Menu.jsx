@@ -4,7 +4,7 @@ import LoginLink from './LoginLink'
 
 export default function Menu({menu,setMenu,user,logout,deleteProfile}) {
   return (
-    <div className='flex justify-between items-center w-full border-b-yellow-600 border-b-2 md:border-b-4 mx-4 xl:h-[10rem]'>
+    <div className='flex justify-between items-center w-full border-b-yellow-600 border-b-2 md:border-b-4  xl:h-[10rem]'>
         <HomeLink></HomeLink>
         {
             user ? 

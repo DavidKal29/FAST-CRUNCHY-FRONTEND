@@ -4,12 +4,8 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import "swiper/css";
 import "swiper/css/pagination";
-import Menu from '../components/Menu';
-import MenuBurguer from '../components/MenuBurguer';
-import DeleteProfile from '../components/DeleteProfile';
-import Logout from '../components/Logout';
 import Promociones from '../components/Promociones';
-import CartLink from '../components/CartLink';
+import Header from '../components/Header';
 
 
 export default function AddAddress() {
@@ -102,14 +98,8 @@ export default function AddAddress() {
 
     return (
         <div className='bg-black min-h-screen flex flex-col justify-start items-center px-4 lg:px-16 py-2 gap-6'>
-            {/* Menú hamburguesa */}
-            <MenuBurguer menu={menu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>}  deleteProfile={<DeleteProfile router={router} toast={toast}></DeleteProfile>}></MenuBurguer>
-                        
-            {/* Menu */}
-            <Menu menu={menu} setMenu={setMenu} user={user} logout={<Logout toast={toast} router={router} setUser={setUser}></Logout>} deleteProfile={<DeleteProfile router={router} toast={toast}></DeleteProfile>}></Menu>
-
-            {/* Carrito */}
-            <CartLink></CartLink>
+            {/* Header */}
+            <Header router={router} toast={toast} user={user} setUser={setUser} menu={menu} setMenu={setMenu} cartVisibility={true}></Header>
 
             <div className='flex flex-col xl:flex-row justify-center items-stretch gap-6 lg:gap-12 w-full'>
                 {/* Formulario */}

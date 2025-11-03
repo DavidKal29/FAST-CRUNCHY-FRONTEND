@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function logout({router,toast,setUser}) {
+export default function Logout({router,toast,setUser}) {
     const handleLogout = ()=>{
             fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,{
                 method:'GET',
