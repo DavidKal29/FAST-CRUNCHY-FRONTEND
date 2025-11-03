@@ -121,7 +121,7 @@ export default function Orders() {
                     </div>
                     
                     {/* Pedidos */}
-                    <div className='flex flex-col justify-start items-center gap-6 max-h-[500px] w-full overflow-y-auto'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 justify-start items-start gap-6 max-h-[500px] md:max-h-[1000px] lg:max-h-[500px] w-full overflow-y-auto'>
 
                         {/* Tarjetas de Direccion */}
                         {orders.map((order)=>(

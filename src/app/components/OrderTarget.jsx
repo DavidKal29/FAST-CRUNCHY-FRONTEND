@@ -50,14 +50,14 @@ export default function OrderTarget({order,deleteOrder}) {
             <span className='text-gray-200 text-sm lg:text-[15px]'>{new Date (order.order.createdAt).toLocaleString()}</span>
 
             {/* Articulos y precio */}
-            <div className='flex justify-between items-center gap-2 w-full'>
+            <div className='flex justify-between  items-center gap-2 w-full'>
                 <p className='text-white text-[15px] lg:text-[20px] font-semibold'>{cartCounter} {cartCounter>1 ? 'artículos' : 'artículo'}</p>
                 <p className='text-yellow-600 text-[15px] lg:text-[20px] font-semibold'>{order.order.price.toFixed(2)}€</p>
             </div>
 
 
             {/* Detalles */}
-            <div className='grid grid-cols-2 md:grid-cols-3 justify-center items-center gap-2'>
+            <div className='grid grid-cols-2 xl:grid-cols-3 justify-center items-center gap-2'>
                 <button onClick={()=>{setDetalles(!detalles)}} className={`cursor-pointer font-semibold text-white bg-black border-2 border-yellow-600 rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>{detalles ? 'Ocultar Detalles' : 'Ver Detalles'}</button>
                                 
                 {/* Recoger */}
