@@ -174,7 +174,7 @@ export default function Cart() {
     const createOrder = ()=>{
         const address = domicilio ? user.address.address : 'none'
 
-        const order = {price:price, products:cart, pickUp:!domicilio, address:address}
+        const order = {price:price, products:cart, pickUp:!domicilio, address:address, createdAt: new Date()}
 
         console.log(order);
         
