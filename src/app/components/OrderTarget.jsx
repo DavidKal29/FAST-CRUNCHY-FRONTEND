@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
-export default function OrderTarget({order}) {
+export default function OrderTarget({order,deleteOrder}) {
     const [detalles,setDetalles] = useState(false)
     const [cartCounter, setCartCounter] = useState(0)
     
@@ -38,9 +38,11 @@ export default function OrderTarget({order}) {
 
 
     return (
-        <div className='flex justify-start items-start flex-col gap-4 border-[2px] border-yellow-600 p-6 rounded w-full'>
+        <div className='flex justify-start items-start flex-col gap-4 border-[2px] border-yellow-600 p-6 rounded w-full relative'>
             {/* Id del Pedido */}
-            <h1 className='font-bold text-[15px] lg:text-[25px] text-white border-b-2 w-full border-yellow-600'>ID: {order._id}</h1>
+            <h1 className='font-bold text-[15px] lg:text-[25px] text-white border-b-2 w-full border-yellow-600'>
+                ID: {order._id}
+            </h1>
 
             <p className='text-white font-semibold text-[15px] lg:text-[20px]'>{order.order.pickUp ? 'Para Recoger' : order.order.address}</p>
                             
@@ -53,13 +55,20 @@ export default function OrderTarget({order}) {
                 <p className='text-yellow-600 text-[15px] lg:text-[20px] font-semibold'>{order.order.price.toFixed(2)}€</p>
             </div>
 
+
             {/* Detalles */}
-            <div className='flex justify-center items-center gap-2'>
+            <div className='grid grid-cols-2 md:grid-cols-3 justify-center items-center gap-2'>
                 <button onClick={()=>{setDetalles(!detalles)}} className={`cursor-pointer font-semibold text-white bg-black border-2 border-yellow-600 rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>{detalles ? 'Ocultar Detalles' : 'Ver Detalles'}</button>
                                 
                 {/* Recoger */}
                 <button onClick={()=>{repeatOrder()}} className={`cursor-pointer font-semibold text-white bg-yellow-500 rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>Repetir Pedido</button>
+
+                {/* Borrar */}
+                <button onClick={()=>{deleteOrder(order._id)}} className={`cursor-pointer font-semibold text-white bg-red-500 rounded-[10px] px-6 py-1 text-sm md:text-[15px]`}>Eliminar</button>
+                
             </div>
+
+            
 
             {/* Detalles del pedido */}
             {detalles && (

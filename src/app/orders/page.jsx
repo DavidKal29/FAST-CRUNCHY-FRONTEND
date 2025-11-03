@@ -62,8 +62,40 @@ export default function Orders() {
    
     }
 
-
-
+    const deleteOrder = (id_order) => {
+        toast("¿Seguro que quieres eliminar este pedido?", {
+            action: {
+                label: "Eliminar",
+                onClick: () => {
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/deleteOrder/${id_order}`, {
+                        method: "GET",
+                        credentials: "include",
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+    
+                        if (data.success) {
+                            toast.success(data.success);
+                            getOrders();
+                        } else {
+                            console.log(data.error);
+                            toast.error(data.error);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log("Error al enviar los datos a Delete Order");
+                        console.error(error);
+                        toast.error("Error al enviar los datos");
+                    });
+                },
+            },
+            cancel: {
+                label: "Cancelar",
+                onClick: () => toast.info("Eliminación cancelada"),
+            },
+        });
+    }
 
     
     useEffect(()=>{
@@ -102,7 +134,7 @@ export default function Orders() {
 
                         {/* Tarjetas de Direccion */}
                         {orders.map((order,index)=>(
-                            <OrderTarget key={index} order={order}></OrderTarget>
+                            <OrderTarget key={index} order={order} deleteOrder={deleteOrder}></OrderTarget>
                         ))}       
         
                     </div>
