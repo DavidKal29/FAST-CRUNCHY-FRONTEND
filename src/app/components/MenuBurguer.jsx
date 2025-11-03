@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MenuBurguer({menu,user,logout}) {
+export default function MenuBurguer({menu,user,logout,deleteProfile}) {
   return (
     <div className={`
         fixed top-0 left-0 h-screen w-[80%] max-w-[400px] sm:max-w-[500px] md:max-w-[600px]
@@ -55,10 +55,7 @@ export default function MenuBurguer({menu,user,logout}) {
                     </a>
     
                     {/* Borrar cuenta */}
-                    <div className='flex items-center bg-red-600 rounded-[10px] p-3'>
-                        <i className="fa-solid fa-trash text-white mr-3 text-[16px] sm:text-[18px] md:text-[20px]"></i>
-                        <p className='text-white font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>Borrar Cuenta</p>
-                    </div>
+                    {deleteProfile}
                 </div>
             </div>
     

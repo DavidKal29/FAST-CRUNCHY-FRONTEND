@@ -2,7 +2,7 @@ import React from 'react'
 import HomeLink from './HomeLink'
 import LoginLink from './LoginLink'
 
-export default function Menu({menu,setMenu,user,logout}) {
+export default function Menu({menu,setMenu,user,logout,deleteProfile}) {
   return (
     <div className='flex justify-between items-center w-full border-b-yellow-600 border-b-2 md:border-b-4 mx-4 xl:h-[10rem]'>
         <HomeLink></HomeLink>
@@ -38,10 +38,7 @@ export default function Menu({menu,setMenu,user,logout}) {
                     </a>
     
                     {/* Borrar cuenta */}
-                    <div className='flex items-center bg-red-600 rounded-[10px] px-4 py-2'>
-                        <i className="fa-solid fa-trash text-white mr-1 text-[16px]"></i>
-                        <p className='text-white font-semibold text-[16px]'>Borrar Cuenta</p>
-                    </div>
+                    {deleteProfile}
 
                     {/* Logout */}
                     {logout}
