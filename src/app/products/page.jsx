@@ -58,14 +58,8 @@ export default function Home() {
     const allRemoved = selectedIngredients?.every(ing=>(ing.selected === false || ing.selected === undefined) && ing.selected != true)
 
     const ingredientsFormalizer = (ingredients_array)=>{
-        let text = ''
-        ingredients_array.forEach(i => {
-            if (i === ingredients_array[0]) {
-                text = i.name
-            }else{
-                text = text + ', ' + i.name
-            }
-        });
+        let array = ingredients_array.map(ing=>ing.name)
+        let text = array.join(", ")
 
         return text
     }

@@ -67,22 +67,14 @@ export default function Cart() {
     }
 
     const ingredientsFormalizer = (ingredients_array)=>{
-        let text = 'Sin:'
-
         const notSelectedIngredients = ingredients_array.filter(ing => ing.selected === false)
 
         if (notSelectedIngredients.length===0) {
             return ''
         }
 
-
-        notSelectedIngredients.forEach(i => {
-            if (i === notSelectedIngredients[0]) {
-                text =  text + ' ' + i.name
-            }else{
-                text = text + ', ' + i.name
-            }
-        });
+        let array = notSelectedIngredients.map(ing=>ing.name)
+        let text = 'Sin: ' + array.join(", ")
 
         return text
     }
