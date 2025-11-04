@@ -7,7 +7,7 @@ export default function MenuBurguer({menu,user,logout,deleteProfile}) {
         bg-yellow-600 flex justify-center items-start
         p-3 pt-6 sm:pt-8 md:pt-10
         overflow-y-auto
-        z-[10]
+        z-[50]
         transition-all duration-300
         ${menu ? 'left-0' : 'left-[-2000px]'}
     `}>
