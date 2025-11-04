@@ -86,7 +86,6 @@ export default function EditProfile() {
 
   return (
     <div className="bg-black min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 lg:px-16 py-6 gap-8">
-      {/* Header */}
       <Header
         router={router}
         toast={toast}
@@ -98,15 +97,12 @@ export default function EditProfile() {
       />
 
       <div className="flex flex-col lg:flex-row justify-center items-center gap-10 w-full max-w-7xl">
-
-        {/* Contenedor Formulario */}
         <div className="relative z-10 bg-zinc-950/60 backdrop-blur-xl rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl border-2 border-yellow-600 w-full max-w-md flex flex-col items-center">
           <h1 className="text-center text-yellow-600 font-bold text-2xl sm:text-3xl mb-6">
             Editar Perfil
           </h1>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full items-center">
-            {/* Email */}
             <div className="flex items-center bg-white rounded-xl w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
               <i className="fa-solid fa-envelope text-yellow-600 text-lg mr-2"></i>
               <input
@@ -119,7 +115,6 @@ export default function EditProfile() {
               />
             </div>
 
-            {/* Nombre */}
             <div className="flex items-center bg-white rounded-xl w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
               <i className="fa-solid fa-user text-yellow-600 text-lg mr-2"></i>
               <input
@@ -132,7 +127,6 @@ export default function EditProfile() {
               />
             </div>
 
-            {/* Apellido */}
             <div className="flex items-center bg-white rounded-xl w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
               <i className="fa-solid fa-user text-yellow-600 text-lg mr-2"></i>
               <input
@@ -145,7 +139,6 @@ export default function EditProfile() {
               />
             </div>
 
-            {/* Teléfono */}
             <div className="flex items-center bg-white rounded-xl w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] px-3">
               <i className="fa-solid fa-phone text-yellow-600 text-lg mr-2"></i>
               <input
@@ -158,7 +151,6 @@ export default function EditProfile() {
               />
             </div>
 
-            {/* Botón */}
             <button
               type="submit"
               className="cursor-pointer w-[16rem] sm:w-[20rem] md:w-[24rem] h-[3rem] bg-yellow-600 rounded-xl text-black font-bold text-lg transition-transform transform hover:scale-105 hover:bg-yellow-500 active:scale-95"
@@ -168,7 +160,6 @@ export default function EditProfile() {
           </form>
         </div>
 
-        {/* Promociones (carrusel fijo) */}
         <div className="w-full max-w-[28rem] xl:max-w-[36rem] flex justify-center">
           <Promociones />
         </div>
