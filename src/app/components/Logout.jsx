@@ -17,6 +17,9 @@ export default function Logout({router,toast,setUser}) {
                         
                         if (data.success) {
                             setUser(null)
+                            
+                            localStorage.clear()
+
                             router.push('/')
                         }else{
                             toast.error(data.error)

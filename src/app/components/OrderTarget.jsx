@@ -58,7 +58,7 @@ export default function OrderTarget({order,deleteOrder}) {
 
             {/* Detalles */}
             <div className='grid grid-cols-2 xl:grid-cols-3 justify-center items-center gap-2'>
-                <button onClick={()=>{setDetalles(!detalles)}} className={`cursor-pointer font-semibold text-white bg-black border-2 border-yellow-600 rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>{detalles ? 'Ocultar Detalles' : 'Ver Detalles'}</button>
+                <button onClick={()=>{setDetalles(!detalles)}} className={`cursor-pointer font-semibold text-white bg-black border-2 border-yellow-600 rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>{detalles ? 'Ocultar' : 'Detalles'}</button>
                                 
                 {/* Recoger */}
                 <button onClick={()=>{repeatOrder()}} className={`cursor-pointer font-semibold text-white bg-yellow-500 rounded-[10px] px-4 py-1 text-sm md:text-[15px]`}>Repetir Pedido</button>
