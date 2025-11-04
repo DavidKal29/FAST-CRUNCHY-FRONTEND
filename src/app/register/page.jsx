@@ -67,9 +67,9 @@ export default function Register() {
         });
     };
 
-    useEffect(() => {
-      document.title = 'Register';
-    }, []);
+    useEffect(()=>{
+      document.title = 'Register'
+    })
 
     useEffect(() => {
       getProfile();

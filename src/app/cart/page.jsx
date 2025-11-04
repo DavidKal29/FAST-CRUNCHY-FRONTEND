@@ -201,7 +201,7 @@ export default function Cart() {
 
     useEffect(()=>{
         document.title = 'Cart'
-    },[])
+    })
 
     useEffect(()=>{
         getProfile()

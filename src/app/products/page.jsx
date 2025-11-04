@@ -127,7 +127,7 @@ export default function Home() {
 
     useEffect(()=>{
         document.title = 'Products'
-    },[])
+    })
 
     useEffect(()=>{
         getProfile()

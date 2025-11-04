@@ -69,9 +69,9 @@ export default function ChangePassword() {
         });
     };
 
-    useEffect(() => {
-      document.title = "Change Password";
-    }, []);
+    useEffect(()=>{
+      document.title = 'Change Password'
+    })
 
     useEffect(() => {
       getProfile();

@@ -99,7 +99,7 @@ export default function Addresses() {
     
     useEffect(()=>{
         document.title = 'Addresses'
-    },[])
+    })
 
     useEffect(()=>{
         getProfile()

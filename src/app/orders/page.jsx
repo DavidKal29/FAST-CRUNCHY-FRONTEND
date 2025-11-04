@@ -97,7 +97,7 @@ export default function Orders() {
     
     useEffect(()=>{
         document.title = 'Orders'
-    },[])
+    })
 
     useEffect(()=>{
         getProfile()

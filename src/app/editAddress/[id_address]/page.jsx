@@ -101,6 +101,9 @@ export default function EditAddress() {
 
   useEffect(() => {
     document.title = 'Edit Address';
+  });
+
+  useEffect(() => {
     getProfile();
     getAddress();
   }, []);

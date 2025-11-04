@@ -45,8 +45,11 @@ export default function Home() {
         .catch(() => toast.error('Error al enviar los datos'));
     };
 
+    useEffect(()=>{
+      document.title = 'Login'
+    })
+
     useEffect(() => {
-      document.title = 'Login';
       getProfile();
     }, []);
 

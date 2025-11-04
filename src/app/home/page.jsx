@@ -39,7 +39,7 @@ export default function Home() {
 
     useEffect(()=>{
         document.title = 'Home'
-    },[])
+    })
 
     useEffect(()=>{
         getProfile()

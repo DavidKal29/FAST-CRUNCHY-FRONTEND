@@ -75,9 +75,12 @@ export default function AddAddress() {
   };
 
   useEffect(() => {
-    document.title = 'Add Address';
     getProfile();
   }, []);
+
+  useEffect(() => {
+      document.title = "Add Address";
+  });
 
   return (
     <div className="bg-black min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 lg:px-16 py-6 gap-8">

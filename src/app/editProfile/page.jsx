@@ -77,9 +77,12 @@ export default function EditProfile() {
   };
 
   useEffect(() => {
-    document.title = 'Edit Profile';
     getProfile();
   }, []);
+
+  useEffect(() => {
+    document.title = "Edit Profile";
+  });
 
   return (
     <div className="bg-black min-h-screen flex flex-col items-center justify-start px-4 sm:px-8 lg:px-16 py-6 gap-8">

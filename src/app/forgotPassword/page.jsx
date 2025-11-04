@@ -63,9 +63,9 @@ export default function ForgotPassword() {
         });
     };
 
-    useEffect(() => {
-      document.title = "Forgot Password";
-    }, []);
+    useEffect(()=>{
+      document.title = 'Forgot Password'
+    })
 
     useEffect(() => {
       getProfile();
